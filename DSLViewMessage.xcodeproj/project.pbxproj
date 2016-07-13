@@ -15,6 +15,7 @@
 		DD3EACA51D36952F00632982 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3EACA31D36952F00632982 /* LaunchScreen.storyboard */; };
 		DD3EACB01D36952F00632982 /* DSLViewMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EACAF1D36952F00632982 /* DSLViewMessageTests.m */; };
 		DD3EACBB1D36952F00632982 /* DSLViewMessageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EACBA1D36952F00632982 /* DSLViewMessageUITests.m */; };
+		DD3EACCB1D36959200632982 /* UIView+DSLMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EACCA1D36959200632982 /* UIView+DSLMessage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		DD3EACB61D36952F00632982 /* DSLViewMessageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DSLViewMessageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3EACBA1D36952F00632982 /* DSLViewMessageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLViewMessageUITests.m; sourceTree = "<group>"; };
 		DD3EACBC1D36952F00632982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD3EACC91D36959200632982 /* UIView+DSLMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DSLMessage.h"; sourceTree = "<group>"; };
+		DD3EACCA1D36959200632982 /* UIView+DSLMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DSLMessage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,7 @@
 		DD3EAC941D36952F00632982 /* DSLViewMessage */ = {
 			isa = PBXGroup;
 			children = (
+				DD3EACC81D36957B00632982 /* DSLViewMessage */,
 				DD3EAC981D36952F00632982 /* AppDelegate.h */,
 				DD3EAC991D36952F00632982 /* AppDelegate.m */,
 				DD3EAC9B1D36952F00632982 /* ViewController.h */,
@@ -138,6 +142,15 @@
 				DD3EACBC1D36952F00632982 /* Info.plist */,
 			);
 			path = DSLViewMessageUITests;
+			sourceTree = "<group>";
+		};
+		DD3EACC81D36957B00632982 /* DSLViewMessage */ = {
+			isa = PBXGroup;
+			children = (
+				DD3EACC91D36959200632982 /* UIView+DSLMessage.h */,
+				DD3EACCA1D36959200632982 /* UIView+DSLMessage.m */,
+			);
+			path = DSLViewMessage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +285,7 @@
 			files = (
 				DD3EAC9D1D36952F00632982 /* ViewController.m in Sources */,
 				DD3EAC9A1D36952F00632982 /* AppDelegate.m in Sources */,
+				DD3EACCB1D36959200632982 /* UIView+DSLMessage.m in Sources */,
 				DD3EAC971D36952F00632982 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,7 +429,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DSLViewMessage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dsl.DSLViewMessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -426,7 +442,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DSLViewMessage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dsl.DSLViewMessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
