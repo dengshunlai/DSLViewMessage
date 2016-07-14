@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D622EA741D3789D4002EDA78 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622EA731D3789D4002EDA78 /* error@2x.png */; };
 		DD3EAC971D36952F00632982 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EAC961D36952F00632982 /* main.m */; };
 		DD3EAC9A1D36952F00632982 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EAC991D36952F00632982 /* AppDelegate.m */; };
 		DD3EAC9D1D36952F00632982 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EAC9C1D36952F00632982 /* ViewController.m */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D622EA731D3789D4002EDA78 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
 		DD3EAC921D36952F00632982 /* DSLViewMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSLViewMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3EAC961D36952F00632982 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DD3EAC981D36952F00632982 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				DD3EAC9B1D36952F00632982 /* ViewController.h */,
 				DD3EAC9C1D36952F00632982 /* ViewController.m */,
 				DD3EAC9E1D36952F00632982 /* Main.storyboard */,
+				D622EA731D3789D4002EDA78 /* error@2x.png */,
 				DD3EACA11D36952F00632982 /* Assets.xcassets */,
 				DD3EACA31D36952F00632982 /* LaunchScreen.storyboard */,
 				DD3EACA61D36952F00632982 /* Info.plist */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD3EACA51D36952F00632982 /* LaunchScreen.storyboard in Resources */,
+				D622EA741D3789D4002EDA78 /* error@2x.png in Resources */,
 				DD3EACA21D36952F00632982 /* Assets.xcassets in Resources */,
 				DD3EACA01D36952F00632982 /* Main.storyboard in Resources */,
 			);
@@ -516,6 +520,7 @@
 				DD3EACC11D36952F00632982 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DD3EACC21D36952F00632982 /* Build configuration list for PBXNativeTarget "DSLViewMessageTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +529,7 @@
 				DD3EACC41D36952F00632982 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DD3EACC51D36952F00632982 /* Build configuration list for PBXNativeTarget "DSLViewMessageUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +538,7 @@
 				DD3EACC71D36952F00632982 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

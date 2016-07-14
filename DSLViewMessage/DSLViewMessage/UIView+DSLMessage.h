@@ -12,6 +12,8 @@
 
 - (void)dsl_showMessage:(NSString *)message;
 
-- (void)hideMessage;
+- (void)dsl_showMessage:(NSString *)message subMessage:(NSString *)subMessage buttonText:(NSString *)buttonText image:(UIImage *)image;
+
+- (void)dsl_hideMessage;
 
 @end
