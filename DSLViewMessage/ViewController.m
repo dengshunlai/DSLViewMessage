@@ -11,6 +11,8 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation ViewController
@@ -18,21 +20,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    //@"请检查网络链接" //@"加载失败" //@"点击重新加载" //[UIImage imageNamed:@"error"]
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.view dsl_showMessage:@"请检查网络链接" subMessage:nil buttonText:nil image:nil];
-    });
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.view dsl_showMessage:@"请检查网络链接" subMessage:@"加载失败" buttonText:@"点击重新加载" image:[UIImage imageNamed:@"error"]];
-    });
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.view dsl_showMessage:@"加载失败" subMessage:nil buttonText:nil image:[UIImage imageNamed:@"error"]];
-    });
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)A:(UIBarButtonItem *)sender {
+    //完整的显示方法
+    [self.tableView dsl_showMessage:@"请检查网络链接" subMessage:@"加载失败" image:[UIImage imageNamed:@"error"] buttonText:@"点击重新加载" buttonClickBlock:^(UIButton *button) {
+        NSLog(@"click button!");
+    } yOffset:0];
+}
+
+- (IBAction)B:(UIBarButtonItem *)sender {
+    [self.tableView dsl_showMessage:@"请检查网络链接"];
+}
+
+- (IBAction)C:(UIBarButtonItem *)sender {
+    [self.tableView dsl_showMessage:@"加载失败" subMessage:nil image:[UIImage imageNamed:@"error"]];
+}
+
+- (IBAction)E:(UIBarButtonItem *)sender {
+    [self.tableView dsl_showMessage:nil subMessage:nil image:[UIImage imageNamed:@"error"]];
+}
+
+- (IBAction)F:(UIBarButtonItem *)sender {
+    [self.tableView dsl_showMessage:@"请检查网络链接" subMessage:@"加载失败" image:nil];
+}
+
+- (IBAction)clear:(UIBarButtonItem *)sender {
+    [self.tableView dsl_removeMessage];
 }
 
 @end

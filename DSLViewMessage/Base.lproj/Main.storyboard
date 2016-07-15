@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,9 +17,60 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="x3Z-6R-6Se">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="x3Z-6R-6Se" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="UgP-dD-Uch"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="x3Z-6R-6Se" secondAttribute="bottom" id="gHP-u2-zbN"/>
+                            <constraint firstAttribute="trailing" secondItem="x3Z-6R-6Se" secondAttribute="trailing" id="ggQ-Gs-Alq"/>
+                            <constraint firstItem="x3Z-6R-6Se" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="s4t-LU-mAT"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cGx-BT-1Vk"/>
+                    <navigationItem key="navigationItem" id="cGx-BT-1Vk">
+                        <leftBarButtonItems>
+                            <barButtonItem title="A" id="pd5-6S-pHX">
+                                <connections>
+                                    <action selector="A:" destination="BYZ-38-t0r" id="d7K-SJ-aSi"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="B" id="dGc-PT-FXG">
+                                <connections>
+                                    <action selector="B:" destination="BYZ-38-t0r" id="7m6-FC-nLk"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="C" id="9hX-eo-I1u">
+                                <connections>
+                                    <action selector="C:" destination="BYZ-38-t0r" id="Nz9-Rh-muV"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem title="indicator" id="Adj-bH-fQK"/>
+                            <barButtonItem title="clear" id="frQ-HT-Y0N">
+                                <connections>
+                                    <action selector="clear:" destination="BYZ-38-t0r" id="hgc-cE-wrJ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="F" id="a4Q-KV-PEz">
+                                <connections>
+                                    <action selector="F:" destination="BYZ-38-t0r" id="0ph-Ka-4kU"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="E" id="Lxq-Dn-f4u">
+                                <connections>
+                                    <action selector="E:" destination="BYZ-38-t0r" id="Nrk-jh-Kyo"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="x3Z-6R-6Se" id="uNj-h3-2FM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -16,15 +16,20 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface UIView ()
 
-@property (strong, nonatomic) UIView *dsl_msgContentView;
-
 @property (strong, nonatomic) UIImageView *dsl_msgImageView;
 @property (strong, nonatomic) UIButton *dsl_msgButton;
 @property (strong, nonatomic) UILabel *dsl_msgLable;
 @property (strong, nonatomic) UILabel *dsl_subMsgLable;
+@property (strong, nonatomic) UIView *dsl_msgContentView;
 
 @property (strong, nonatomic) NSArray *dsl_msgContentViewConstraints;
 @property (strong, nonatomic) NSArray *dsl_msgSelfConstraints;
+
+@property (copy, nonatomic) ButtonClickBlock dsl_msgButtonClickBlock;
+
+@property (strong, nonatomic) UIView *dsl_indicatorView;
+@property (strong, nonatomic) UIView *dsl_indicatorContentView;
+@property (strong, nonatomic) UILabel *dsl_indicatorMsgLable;
 
 @end
 
@@ -122,25 +127,52 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     objc_setAssociatedObject(self, @selector(dsl_msgSelfConstraints), dsl_msgSelfConstraints, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (ButtonClickBlock)dsl_msgButtonClickBlock
+{
+    return objc_getAssociatedObject(self, @selector(dsl_msgButtonClickBlock));
+}
+
+- (void)setDsl_msgButtonClickBlock:(ButtonClickBlock)dsl_msgButtonClickBlock
+{
+    objc_setAssociatedObject(self, @selector(dsl_msgButtonClickBlock), dsl_msgButtonClickBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
 #pragma mark - API
 
 - (void)dsl_showMessage:(NSString *)message
 {
-    self.dsl_msgLable.hidden = NO;
-    self.dsl_msgLable.text = message;
+    [self dsl_showMessage:message subMessage:nil image:nil buttonText:nil buttonClickBlock:nil yOffset:0];
 }
 
-- (void)dsl_showMessage:(NSString *)message subMessage:(NSString *)subMessage buttonText:(NSString *)buttonText image:(UIImage *)image
+- (void)dsl_showMessage:(NSString *)message
+             subMessage:(NSString *)subMessage
+                  image:(UIImage *)image
+{
+    [self dsl_showMessage:message subMessage:subMessage image:image buttonText:nil buttonClickBlock:nil yOffset:0];
+}
+
+- (void)dsl_showMessage:(NSString *)message subMessage:(NSString *)subMessage image:(UIImage *)image buttonText:(NSString *)buttonText buttonClickBlock:(ButtonClickBlock)block
+{
+    [self dsl_showMessage:message subMessage:subMessage image:image buttonText:buttonText buttonClickBlock:block yOffset:0];
+}
+
+- (void)dsl_showMessage:(NSString *)message
+             subMessage:(NSString *)subMessage
+                  image:(UIImage *)image
+             buttonText:(NSString *)buttonText
+       buttonClickBlock:(ButtonClickBlock)block
+                yOffset:(CGFloat)yOffset
 {
     self.dsl_msgLable.text = message;
     self.dsl_subMsgLable.text = subMessage;
-    [self.dsl_msgButton setTitle:[NSString stringWithFormat:@" %@ ",buttonText] forState:UIControlStateNormal];
+    [self.dsl_msgButton setTitle:[NSString stringWithFormat:@"  %@  ",buttonText] forState:UIControlStateNormal];
     self.dsl_msgImageView.image = image;
+    self.dsl_msgButtonClickBlock = block;
     
     [self.dsl_msgContentView removeConstraints:self.dsl_msgContentViewConstraints];
     [self removeConstraints:self.dsl_msgSelfConstraints];
     
-    self.dsl_msgContentViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[dsl_msgImageView(imageViewHeight)]-8-[dsl_msgLable]-5-[dsl_subMsgLable]-6-[dsl_msgButton(buttonHeight)]-|"
+    self.dsl_msgContentViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[dsl_msgImageView(imageViewHeight)]-8-[dsl_msgLable]-5-[dsl_subMsgLable]-7-[dsl_msgButton(buttonHeight)]-|"
                                                                                  options:0
                                                                                  metrics:@{@"imageViewHeight":@(image ? image.size.height : 0),
                                                                                            @"buttonHeight":@(buttonText.length ? 32 : 0)}
@@ -155,14 +187,39 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     NSMutableArray *tempArr = @[].mutableCopy;
     [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:size.width]];
     [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:size.height]];
+    [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:yOffset]];
     self.dsl_msgSelfConstraints = tempArr;
     
     [self addConstraints:self.dsl_msgSelfConstraints];
     
     self.dsl_msgContentView.hidden = NO;
-    
-    NSLog(@"%ld,%ld",self.dsl_msgContentView.constraints.count,self.constraints.count);
-    NSLog(@"%ld",self.dsl_subMsgLable.constraints.count);
+    NSLog(@"%ld",self.constraints.count);
+}
+
+- (void)dsl_removeMessage
+{
+    UIView *view = objc_getAssociatedObject(self, @selector(dsl_msgContentView));
+    view.hidden = YES;
+}
+
+- (void)dsl_showIndicatorWithType:(NSInteger)type message:(NSString *)message yOffset:(CGFloat)yOffset
+{
+    ;
+}
+
+- (void)dsl_showIndicatorWithType:(NSInteger)type message:(NSString *)message
+{
+    ;
+}
+
+- (void)dsl_showIndicatorWithType:(NSInteger)type
+{
+    ;
+}
+
+- (void)dsl_showIndicator
+{
+    ;
 }
 
 #pragma mark - create UI
@@ -201,6 +258,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     button.layer.masksToBounds = YES;
     button.layer.borderColor = UIColorFromRGB(0x666666).CGColor;
     button.layer.borderWidth = 1;
+    [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.dsl_msgContentView addSubview:button];
     button.translatesAutoresizingMaskIntoConstraints = NO;
     [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
@@ -223,15 +281,17 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [self addSubview:view];
     view.translatesAutoresizingMaskIntoConstraints = NO;
     [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     view.hidden = YES;
     return view;
 }
 
-- (void)dsl_hideMessage
+#pragma mark - Action
+
+- (void)buttonClick:(UIButton *)sender
 {
-    UIView *view = objc_getAssociatedObject(self, @selector(dsl_msgContentView));
-    view.hidden = YES;
+    if (self.dsl_msgButtonClickBlock) {
+        self.dsl_msgButtonClickBlock(sender);
+    }
 }
 
 @end
