@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DSLIndicator.h"
 
 /******************************************************************************************************************************
  *
@@ -30,7 +31,7 @@ typedef void(^ButtonClickBlock)(UIButton *button);
  *  @param image      图片
  *  @param buttonText 按钮文字
  *  @param block      按钮点击block
- *  @param yOffset    在y轴上的偏移
+ *  @param yOffset    在y轴上的偏移，默认0
  */
 - (void)dsl_showMessage:(NSString *)message
              subMessage:(NSString *)subMessage
@@ -56,13 +57,40 @@ typedef void(^ButtonClickBlock)(UIButton *button);
  */
 - (void)dsl_removeMessage;
 
-- (void)dsl_showIndicatorWithType:(NSInteger)type message:(NSString *)message yOffset:(CGFloat)yOffset;
+/**
+ *  指示器显示方法，不需要的部分传nil/0
+ *
+ *  @param style   指示器风格
+ *  @param message 文本
+ *  @param isLimit 是否限制交互，默认否
+ *  @param yOffset y轴上的偏移，默认0
+ */
+- (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style
+                          message:(NSString *)message
+                            limit:(BOOL)isLimit
+                          yOffset:(CGFloat)yOffset;
 
-- (void)dsl_showIndicatorWithType:(NSInteger)type message:(NSString *)message;
+- (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style
+                          message:(NSString *)message
+                            limit:(BOOL)isLimit;
 
-- (void)dsl_showIndicatorWithType:(NSInteger)type;
+- (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style
+                            limit:(BOOL)isLimit;
+
+- (void)dsl_showIndicatorWithMessage:(NSString *)message
+                               limit:(BOOL)isLimit;
+
+- (void)dsl_showIndicatorWithMessage:(NSString *)message;
+
+- (void)dsl_showIndicatorWithLimit:(BOOL)isLimit;
+
+- (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style;
 
 - (void)dsl_showIndicator;
 
+/**
+ *  去除指示器
+ */
+- (void)dsl_removeIndicator;
 
 @end

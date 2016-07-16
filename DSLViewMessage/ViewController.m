@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "UIView+DSLMessage.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -51,7 +51,37 @@
 }
 
 - (IBAction)clear:(UIBarButtonItem *)sender {
+    //去除信息
     [self.tableView dsl_removeMessage];
+    //去除指示器
+    [self.tableView dsl_removeIndicator];
+}
+
+- (IBAction)indicator:(UIBarButtonItem *)sender {
+    [self.tableView dsl_showIndicator];
+//    [self.tableView dsl_showIndicatorWithMessage:@"加载中"];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [tableView dequeueReusableCellWithIdentifier:@"cell"];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.1;
 }
 
 @end
