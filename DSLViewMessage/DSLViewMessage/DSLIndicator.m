@@ -57,6 +57,11 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     [_indicatorLayer addAnimation:[self animationWithStyle:_style] forKey:@"indicator"];
 }
 
+- (void)removeAnimation
+{
+    [_indicatorLayer removeAllAnimations];
+}
+
 - (CALayer *)layerWithStyle:(DSLIndicatorStyle)style
 {
     switch (style) {
@@ -89,8 +94,9 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
                                                     startAngle:0
                                                       endAngle:1.8 * M_PI
                                                      clockwise:YES];
+    path.lineWidth = 2;
     layer.path = path.CGPath;
-    layer.strokeColor = [UIColor blueColor].CGColor;
+    layer.strokeColor = UIColorFromRGB(0x0080ff).CGColor;
     layer.fillColor = [UIColor clearColor].CGColor;
     layer.frame = CGRectMake(0, 0, _size, _size);
     return layer;

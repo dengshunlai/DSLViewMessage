@@ -254,7 +254,6 @@ static CGFloat const kIndicatorSize = 30;
     [self addConstraints:self.dsl_msgSelfConstraints];
     
     self.dsl_msgContentView.hidden = NO;
-    NSLog(@"%ld",self.constraints.count);
 }
 
 - (void)dsl_removeMessage
@@ -336,7 +335,6 @@ static CGFloat const kIndicatorSize = 30;
     
     [indicator starAnimation];
     self.dsl_indicatorContentView.hidden = NO;
-    NSLog(@"%ld,%ld",self.dsl_indicatorContentView.constraints.count,self.dsl_indicatorView.constraints.count);
 }
 
 - (void)dsl_removeIndicator
