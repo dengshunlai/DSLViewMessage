@@ -68,6 +68,12 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
         case DSLIndicatorStyle_0:
             return [self layerForStyle_0];
             break;
+        case DSLIndicatorStyle_1:
+            return [self layerForStyle_1];
+            break;
+        case DSLIndicatorStyle_2:
+            return [self layerForStyle_2];
+            break;
         default:
             return nil;
             break;
@@ -80,17 +86,25 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
         case DSLIndicatorStyle_0:
             return [self animationForStyle_0];
             break;
+        case DSLIndicatorStyle_1:
+            return [self animationForStyle_1];
+            break;
+        case DSLIndicatorStyle_2:
+            return [self animationForStyle_2];
+            break;
         default:
             return nil;
             break;
     }
 }
 
+#pragma mark - layer & animation
+
 - (CAShapeLayer *)layerForStyle_0
 {
     CAShapeLayer *layer = [CAShapeLayer layer];
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(_size / 2, _size / 2)
-                                                        radius:_size / 2 - 2
+                                                        radius:_size / 2 - 1
                                                     startAngle:0
                                                       endAngle:1.8 * M_PI
                                                      clockwise:YES];
@@ -111,6 +125,85 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     animation.duration = 1;
     animation.repeatCount = INFINITY;
     return animation;
+}
+
+- (CAShapeLayer *)layerForStyle_1
+{
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, _size, _size)];
+    layer.path = path.CGPath;
+    layer.fillColor = UIColorFromRGB(0x0080ff).CGColor;
+    layer.frame = CGRectMake(0, 0, _size, _size);
+    return layer;
+}
+
+- (CAAnimationGroup *)animationForStyle_1
+{
+    CABasicAnimation *xAnimation = [CABasicAnimation animation];
+    xAnimation.keyPath = @"transform.rotation.x";
+    xAnimation.fromValue = @(0);
+    xAnimation.toValue = @(M_PI);
+    xAnimation.beginTime = 0;
+    xAnimation.duration = 0.6;
+    
+    CABasicAnimation *yAnimation = [CABasicAnimation animation];
+    yAnimation.keyPath = @"transform.rotation.y";
+    yAnimation.fromValue = @(0);
+    yAnimation.toValue = @(M_PI);
+    yAnimation.beginTime = 0.6;
+    yAnimation.duration = 0.6;
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.animations = @[xAnimation, yAnimation];
+    group.duration = 1.2;
+    group.repeatCount = INFINITY;
+    
+    return group;
+}
+
+- (CAShapeLayer *)layerForStyle_2
+{
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(_size / 2, _size / 2)
+                                                        radius:_size / 2 - 1
+                                                    startAngle:0
+                                                      endAngle:1.8 * M_PI
+                                                     clockwise:YES];
+    path.lineWidth = 2;
+    layer.path = path.CGPath;
+    layer.strokeColor = UIColorFromRGB(0x0080ff).CGColor;
+    layer.fillColor = [UIColor clearColor].CGColor;
+    layer.frame = CGRectMake(0, 0, _size, _size);
+    return layer;
+}
+
+- (CAAnimationGroup *)animationForStyle_2
+{
+    CABasicAnimation *rotationAnimation = [CABasicAnimation animation];
+    rotationAnimation.keyPath = @"transform.rotation.z";
+    rotationAnimation.fromValue = @(0);
+    rotationAnimation.toValue = @(2 * M_PI);
+    
+    CABasicAnimation *strokeStartAnimation = [CABasicAnimation animation];
+    strokeStartAnimation.keyPath = @"strokeStart";
+    strokeStartAnimation.fromValue = @(0);
+    strokeStartAnimation.toValue = @(1);
+    strokeStartAnimation.beginTime = 0;
+    strokeStartAnimation.duration = 0.6;
+    
+    CABasicAnimation *strokeEndAnimation = [CABasicAnimation animation];
+    strokeEndAnimation.keyPath = @"strokeEnd";
+    strokeEndAnimation.fromValue = @(0);
+    strokeEndAnimation.toValue = @(1);
+    strokeEndAnimation.beginTime = 0.6;
+    strokeEndAnimation.duration = 0.6;
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.animations = @[rotationAnimation, strokeStartAnimation, strokeEndAnimation];
+    group.duration = 1.2;
+    group.repeatCount = INFINITY;
+    
+    return group;
 }
 
 @end

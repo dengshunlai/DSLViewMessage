@@ -40,6 +40,13 @@ typedef void(^ButtonClickBlock)(UIButton *button);
        buttonClickBlock:(ButtonClickBlock)block
                 yOffset:(CGFloat)yOffset;
 
+/**
+ *  信息显示方法，参数可变，以上面的方法为蓝本，依次传递，不需要的传nil，非对象需要包装成对象
+ *
+ *  @param firstParam 可变参数列表，以nil结尾
+ */
+- (void)dsl_showMessageWithParams:(id)firstParam,... NS_REQUIRES_NIL_TERMINATION;
+
 - (void)dsl_showMessage:(NSString *)message
              subMessage:(NSString *)subMessage
                   image:(UIImage *)image
@@ -69,6 +76,13 @@ typedef void(^ButtonClickBlock)(UIButton *button);
                           message:(NSString *)message
                             limit:(BOOL)isLimit
                           yOffset:(CGFloat)yOffset;
+
+/**
+ *  指示器显示方法，参数可变，以上面的方法为蓝本，依次传递，不需要的传nil，非对象需要包装成对象
+ *
+ *  @param firstParam 可变参数列表，以nil结尾
+ */
+- (void)dsl_showIndicatorWithParams:(id)firstParam,... NS_REQUIRES_NIL_TERMINATION;
 
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style
                           message:(NSString *)message

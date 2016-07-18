@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, DSLIndicatorStyle) {
-    DSLIndicatorStyle_0 = 0
+    DSLIndicatorStyle_0 = 0,
+    DSLIndicatorStyle_1,
+    DSLIndicatorStyle_2
 };
 
 @interface DSLIndicator : UIView

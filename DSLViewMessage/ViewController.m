@@ -58,8 +58,16 @@
 }
 
 - (IBAction)indicator:(UIBarButtonItem *)sender {
-    [self.tableView dsl_showIndicator];
+    [self.tableView dsl_showIndicatorWithStyle:DSLIndicatorStyle_2];
+    
 //    [self.tableView dsl_showIndicatorWithMessage:@"加载中"];
+    
+//    [[UIApplication sharedApplication].keyWindow dsl_showIndicatorWithMessage:@"限制交互" limit:YES];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [[UIApplication sharedApplication].keyWindow dsl_removeIndicator];
+//    });
+    
+//    [self.tableView dsl_showIndicatorWithParams:@(0),@"请等待",@(NO),@(0), nil];
 }
 
 #pragma mark - UITableViewDataSource

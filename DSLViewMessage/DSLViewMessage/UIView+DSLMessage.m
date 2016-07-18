@@ -216,6 +216,46 @@ static CGFloat const kIndicatorSize = 30;
     [self dsl_showMessage:message subMessage:subMessage image:image buttonText:buttonText buttonClickBlock:block yOffset:0];
 }
 
+- (void)dsl_showMessageWithParams:(id)firstParam, ...
+{
+    va_list ap;
+    va_start(ap, firstParam);
+    NSString *message;
+    NSString *subMessage;
+    UIImage *image;
+    NSString *buttonText;
+    ButtonClickBlock block;
+    CGFloat yOffset = 0.0;
+    int index = 0;
+    for (id param = firstParam; param != nil; param = va_arg(ap, id)) {
+        switch (index) {
+            case 0:
+                message = param;
+                break;
+            case 1:
+                subMessage = param;
+                break;
+            case 2:
+                image = param;
+                break;
+            case 3:
+                buttonText = param;
+                break;
+            case 4:
+                block = param;
+                break;
+            case 5:
+                yOffset = [param doubleValue];
+                break;
+            default:
+                break;
+        }
+        index++;
+    }
+    va_end(ap);
+    [self dsl_showMessage:message subMessage:subMessage image:image buttonText:buttonText buttonClickBlock:block yOffset:yOffset];
+}
+
 - (void)dsl_showMessage:(NSString *)message
              subMessage:(NSString *)subMessage
                   image:(UIImage *)image
@@ -295,6 +335,38 @@ static CGFloat const kIndicatorSize = 30;
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style message:(NSString *)message limit:(BOOL)isLimit
 {
     [self dsl_showIndicatorWithStyle:style message:message limit:isLimit yOffset:0];
+}
+
+- (void)dsl_showIndicatorWithParams:(id)firstParam, ...
+{
+    va_list ap;
+    va_start(ap, firstParam);
+    DSLIndicatorStyle style = 0;
+    NSString *message = nil;
+    BOOL limit = NO;
+    CGFloat yOffset = 0;
+    int index = 0;
+    for (id param = firstParam; param != nil; param = va_arg(ap, id)) {
+        switch (index) {
+            case 0:
+                style = [param integerValue];
+                break;
+            case 1:
+                message = param;
+                break;
+            case 2:
+                limit = [param boolValue];
+                break;
+            case 3:
+                yOffset = [param doubleValue];
+                break;
+            default:
+                break;
+        }
+        index++;
+    }
+    va_end(ap);
+    [self dsl_showIndicatorWithStyle:style message:message limit:limit yOffset:yOffset];
 }
 
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style message:(NSString *)message limit:(BOOL)isLimit yOffset:(CGFloat)yOffset
