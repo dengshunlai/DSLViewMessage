@@ -167,7 +167,7 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(_size / 2, _size / 2)
                                                         radius:_size / 2 - 1
                                                     startAngle:0
-                                                      endAngle:1.8 * M_PI
+                                                      endAngle:2 * M_PI
                                                      clockwise:YES];
     path.lineWidth = 2;
     layer.path = path.CGPath;
@@ -189,18 +189,18 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     strokeStartAnimation.fromValue = @(0);
     strokeStartAnimation.toValue = @(1);
     strokeStartAnimation.beginTime = 0;
-    strokeStartAnimation.duration = 0.6;
+    strokeStartAnimation.duration = 0.7;
     
     CABasicAnimation *strokeEndAnimation = [CABasicAnimation animation];
     strokeEndAnimation.keyPath = @"strokeEnd";
     strokeEndAnimation.fromValue = @(0);
     strokeEndAnimation.toValue = @(1);
-    strokeEndAnimation.beginTime = 0.6;
-    strokeEndAnimation.duration = 0.6;
+    strokeEndAnimation.beginTime = 0.7;
+    strokeEndAnimation.duration = 0.7;
     
     CAAnimationGroup *group = [CAAnimationGroup animation];
     group.animations = @[rotationAnimation, strokeStartAnimation, strokeEndAnimation];
-    group.duration = 1.2;
+    group.duration = 1.4;
     group.repeatCount = INFINITY;
     
     return group;
