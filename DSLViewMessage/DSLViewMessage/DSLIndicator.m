@@ -124,6 +124,8 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     animation.toValue = @(2 * M_PI);
     animation.duration = 1;
     animation.repeatCount = INFINITY;
+    animation.removedOnCompletion = NO;
+    
     return animation;
 }
 
@@ -157,6 +159,7 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     group.animations = @[xAnimation, yAnimation];
     group.duration = 1.2;
     group.repeatCount = INFINITY;
+    group.removedOnCompletion = NO;
     
     return group;
 }
@@ -201,7 +204,9 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     CAAnimationGroup *group = [CAAnimationGroup animation];
     group.animations = @[rotationAnimation, strokeStartAnimation, strokeEndAnimation];
     group.duration = 1.4;
-    group.repeatCount = INFINITY;
+    group.repeatDuration = INFINITY;
+    group.removedOnCompletion = NO;
+    group.timeOffset = .5;
     
     return group;
 }
