@@ -58,7 +58,7 @@
 }
 
 - (IBAction)indicator:(UIBarButtonItem *)sender {
-    [self.tableView dsl_showIndicatorWithStyle:DSLIndicatorStyle_2];
+    [self.tableView dsl_showIndicatorWithStyle:DSLIndicatorStyle_3];
     
 //    [self.tableView dsl_showIndicatorWithMessage:@"加载中"];
     

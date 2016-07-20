@@ -11,7 +11,8 @@
 typedef NS_ENUM(NSInteger, DSLIndicatorStyle) {
     DSLIndicatorStyle_0 = 0,
     DSLIndicatorStyle_1,
-    DSLIndicatorStyle_2
+    DSLIndicatorStyle_2,
+    DSLIndicatorStyle_3
 };
 
 @interface DSLIndicator : UIView

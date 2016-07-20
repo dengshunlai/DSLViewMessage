@@ -13,7 +13,7 @@ colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-static CGFloat const kSize = 50;
+static CGFloat const kSize = 30;
 static NSInteger const kStyle = DSLIndicatorStyle_0;
 
 @interface DSLIndicator ()
@@ -47,14 +47,13 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     DSLIndicator *indicator = [[DSLIndicator alloc] initWithFrame:CGRectMake(0, 0, size, size)];
     indicator.size = size;
     indicator.style = style;
-    indicator.indicatorLayer = [indicator layerWithStyle:style];
-    [indicator.layer addSublayer:indicator.indicatorLayer];
     return indicator;
 }
 
 - (void)starAnimation
 {
-    [_indicatorLayer addAnimation:[self animationWithStyle:_style] forKey:@"indicator"];
+    _indicatorLayer = [self layerWithStyle:_style];
+    [self.layer addSublayer:_indicatorLayer];
 }
 
 - (void)removeAnimation
@@ -64,38 +63,13 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
 
 - (CALayer *)layerWithStyle:(DSLIndicatorStyle)style
 {
-    switch (style) {
-        case DSLIndicatorStyle_0:
-            return [self layerForStyle_0];
-            break;
-        case DSLIndicatorStyle_1:
-            return [self layerForStyle_1];
-            break;
-        case DSLIndicatorStyle_2:
-            return [self layerForStyle_2];
-            break;
-        default:
-            return nil;
-            break;
-    }
-}
-
-- (CAAnimation *)animationWithStyle:(DSLIndicatorStyle)style
-{
-    switch (style) {
-        case DSLIndicatorStyle_0:
-            return [self animationForStyle_0];
-            break;
-        case DSLIndicatorStyle_1:
-            return [self animationForStyle_1];
-            break;
-        case DSLIndicatorStyle_2:
-            return [self animationForStyle_2];
-            break;
-        default:
-            return nil;
-            break;
-    }
+    NSString *selectorName = [NSString stringWithFormat:@"layerForStyle_%ld",style];
+    SEL selector = NSSelectorFromString(selectorName);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    CALayer *layer = [self performSelector:selector];
+#pragma clang diagnostic pop
+    return layer;
 }
 
 #pragma mark - layer & animation
@@ -113,11 +87,7 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     layer.strokeColor = UIColorFromRGB(0x0080ff).CGColor;
     layer.fillColor = [UIColor clearColor].CGColor;
     layer.frame = CGRectMake(0, 0, _size, _size);
-    return layer;
-}
-
-- (CABasicAnimation *)animationForStyle_0
-{
+    
     CABasicAnimation *animation = [CABasicAnimation animation];
     animation.keyPath = @"transform.rotation.z";
     animation.fromValue = @(0);
@@ -126,7 +96,8 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     animation.repeatCount = INFINITY;
     animation.removedOnCompletion = NO;
     
-    return animation;
+    [layer addAnimation:animation forKey:@"style_0"];
+    return layer;
 }
 
 - (CAShapeLayer *)layerForStyle_1
@@ -136,11 +107,7 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     layer.path = path.CGPath;
     layer.fillColor = UIColorFromRGB(0x0080ff).CGColor;
     layer.frame = CGRectMake(0, 0, _size, _size);
-    return layer;
-}
-
-- (CAAnimationGroup *)animationForStyle_1
-{
+    
     CABasicAnimation *xAnimation = [CABasicAnimation animation];
     xAnimation.keyPath = @"transform.rotation.x";
     xAnimation.fromValue = @(0);
@@ -161,7 +128,8 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     group.repeatCount = INFINITY;
     group.removedOnCompletion = NO;
     
-    return group;
+    [layer addAnimation:group forKey:@"style_1"];
+    return layer;
 }
 
 - (CAShapeLayer *)layerForStyle_2
@@ -177,11 +145,7 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     layer.strokeColor = UIColorFromRGB(0x0080ff).CGColor;
     layer.fillColor = [UIColor clearColor].CGColor;
     layer.frame = CGRectMake(0, 0, _size, _size);
-    return layer;
-}
-
-- (CAAnimationGroup *)animationForStyle_2
-{
+    
     CABasicAnimation *rotationAnimation = [CABasicAnimation animation];
     rotationAnimation.keyPath = @"transform.rotation.z";
     rotationAnimation.fromValue = @(0);
@@ -208,7 +172,39 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     group.removedOnCompletion = NO;
     group.timeOffset = .5;
     
-    return group;
+    [layer addAnimation:group forKey:@"style_2"];
+    return layer;
+}
+
+- (CALayer *)layerForStyle_3
+{
+    CALayer *layer = [CALayer layer];
+    CGFloat size = _size + 30;
+    layer.frame = CGRectMake(0, 0, size, size);
+    
+    CALayer *redCircleLayer = [CALayer layer];
+    redCircleLayer.frame = CGRectMake(size / 6, size / 2, 10, 10);
+    redCircleLayer.backgroundColor = [UIColor redColor].CGColor;
+    redCircleLayer.cornerRadius = 5;
+    redCircleLayer.masksToBounds = YES;
+    
+    CALayer *yellowCircleLayer = [CALayer layer];
+    yellowCircleLayer.frame = CGRectMake(size / 2, size / 2, 10, 10);
+    yellowCircleLayer.backgroundColor = [UIColor yellowColor].CGColor;
+    yellowCircleLayer.cornerRadius = 5;
+    yellowCircleLayer.masksToBounds = YES;
+    
+    CALayer *blueCircleLayer = [CALayer layer];
+    blueCircleLayer.frame = CGRectMake(size * 5/ 6, size / 2, 10, 10);
+    blueCircleLayer.backgroundColor = [UIColor blueColor].CGColor;
+    blueCircleLayer.cornerRadius = 5;
+    blueCircleLayer.masksToBounds = YES;
+    
+    [layer addSublayer:redCircleLayer];
+    [layer addSublayer:yellowCircleLayer];
+    [layer addSublayer:blueCircleLayer];
+    
+    return layer;
 }
 
 @end
