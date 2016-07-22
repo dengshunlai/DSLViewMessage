@@ -178,32 +178,56 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
 
 - (CALayer *)layerForStyle_3
 {
+    CGFloat size = _size + 20;
+    CGFloat dotSize = 10;
+    
     CALayer *layer = [CALayer layer];
-    CGFloat size = _size + 30;
-    layer.frame = CGRectMake(0, 0, size, size);
+    layer.frame = CGRectMake(-10, -10, size, size);
     
     CALayer *redCircleLayer = [CALayer layer];
-    redCircleLayer.frame = CGRectMake(size / 6, size / 2, 10, 10);
+    redCircleLayer.frame = CGRectMake(0, size / 2 - dotSize / 2, dotSize, dotSize);
     redCircleLayer.backgroundColor = [UIColor redColor].CGColor;
     redCircleLayer.cornerRadius = 5;
     redCircleLayer.masksToBounds = YES;
     
-    CALayer *yellowCircleLayer = [CALayer layer];
-    yellowCircleLayer.frame = CGRectMake(size / 2, size / 2, 10, 10);
-    yellowCircleLayer.backgroundColor = [UIColor yellowColor].CGColor;
-    yellowCircleLayer.cornerRadius = 5;
-    yellowCircleLayer.masksToBounds = YES;
+    CALayer *grayCircleLayer = [CALayer layer];
+    grayCircleLayer.frame = CGRectMake(size / 2 - dotSize / 2, size / 2 - dotSize / 2, dotSize, dotSize);
+    grayCircleLayer.backgroundColor = [UIColor grayColor].CGColor;
+    grayCircleLayer.cornerRadius = 5;
+    grayCircleLayer.masksToBounds = YES;
     
     CALayer *blueCircleLayer = [CALayer layer];
-    blueCircleLayer.frame = CGRectMake(size * 5/ 6, size / 2, 10, 10);
+    blueCircleLayer.frame = CGRectMake(size - dotSize, size / 2 - dotSize / 2, dotSize, dotSize);
     blueCircleLayer.backgroundColor = [UIColor blueColor].CGColor;
     blueCircleLayer.cornerRadius = 5;
     blueCircleLayer.masksToBounds = YES;
     
     [layer addSublayer:redCircleLayer];
-    [layer addSublayer:yellowCircleLayer];
+    [layer addSublayer:grayCircleLayer];
     [layer addSublayer:blueCircleLayer];
     
+    CABasicAnimation *redAnimation = [CABasicAnimation animation];
+    redAnimation.keyPath = @"transform";
+    redAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    redAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeTranslation(size - dotSize, 0, 0)];
+    redAnimation.repeatCount = INFINITY;
+    redAnimation.duration = 1;
+    redAnimation.autoreverses = YES;
+    redAnimation.removedOnCompletion = NO;
+    redAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    CABasicAnimation *blueAnimation = [CABasicAnimation animation];
+    blueAnimation.keyPath = @"transform";
+    blueAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    blueAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeTranslation(-size + dotSize, 0, 0)];
+    blueAnimation.repeatCount = INFINITY;
+    blueAnimation.duration = 1;
+    blueAnimation.autoreverses = YES;
+    blueAnimation.removedOnCompletion = NO;
+    blueAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    [redCircleLayer addAnimation:redAnimation forKey:@"red"];
+    [blueCircleLayer addAnimation:blueAnimation forKey:@"blue"];
     return layer;
 }
 
