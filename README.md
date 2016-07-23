@@ -41,5 +41,7 @@
  */
 - (void)dsl_removeIndicator;
 ```
+效果图：
+
 ![](https://github.com/dengshunlai/DSLViewMessage/raw/master/showMessage.png)
 ![](https://github.com/dengshunlai/DSLViewMessage/raw/master/showIndicator.png)
