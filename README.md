@@ -1,5 +1,6 @@
 # DSLViewMessage
 用法：
+#import "UIView+DSLMessage.h"
 ```
 /**
  *  信息显示方法，不需要的部分传nil/0
