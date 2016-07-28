@@ -45,7 +45,13 @@ static CGFloat const kIndicatorSize = 30;
 {
     UILabel *label = objc_getAssociatedObject(self, @selector(dsl_msgLable));
     if (!label) {
-        label = self.dsl_msgLable = [self dsl_createMsgLabel];
+        self.dsl_msgLable = label = [[UILabel alloc] init];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.numberOfLines = 0;
+        label.textColor = UIColorFromRGB(0x666666);
+        [self.dsl_msgContentView addSubview:label];
+        label.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return label;
 }
@@ -59,7 +65,13 @@ static CGFloat const kIndicatorSize = 30;
 {
     UILabel *label = objc_getAssociatedObject(self, @selector(dsl_subMsgLable));
     if (!label) {
-        label = self.dsl_subMsgLable = [self dsl_createSubMsgLabel];
+        self.dsl_subMsgLable= label = [[UILabel alloc] init];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.numberOfLines = 0;
+        label.textColor = UIColorFromRGB(0x999999);
+        [self.dsl_msgContentView addSubview:label];
+        label.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return label;
 }
@@ -73,7 +85,18 @@ static CGFloat const kIndicatorSize = 30;
 {
     UIButton *button = objc_getAssociatedObject(self, @selector(dsl_msgButton));
     if (!button) {
-        button = self.dsl_msgButton = [self dsl_createButton];
+        self.dsl_msgButton = button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.backgroundColor = [UIColor whiteColor];
+        [button setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:16];
+        button.layer.cornerRadius = 5;
+        button.layer.masksToBounds = YES;
+        button.layer.borderColor = UIColorFromRGB(0x666666).CGColor;
+        button.layer.borderWidth = 1;
+        [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.dsl_msgContentView addSubview:button];
+        button.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return button;
 }
@@ -87,7 +110,10 @@ static CGFloat const kIndicatorSize = 30;
 {
     UIImageView *iv = objc_getAssociatedObject(self, @selector(dsl_msgImageView));
     if (!iv) {
-        iv = self.dsl_msgImageView = [self dsl_createImageView];
+        self.dsl_msgImageView = iv = [[UIImageView alloc] init];
+        [self.dsl_msgContentView addSubview:iv];
+        iv.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:iv attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return iv;
 }
@@ -101,7 +127,12 @@ static CGFloat const kIndicatorSize = 30;
 {
     UIView *view = objc_getAssociatedObject(self, @selector(dsl_msgContentView));
     if (!view) {
-        view = self.dsl_msgContentView = [self dsl_createMsgContentView];
+        self.dsl_msgContentView = view = [[UIView alloc] init];
+        view.backgroundColor = [UIColor clearColor];
+        [self addSubview:view];
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+        view.hidden = YES;
     }
     return view;
 }
@@ -145,7 +176,12 @@ static CGFloat const kIndicatorSize = 30;
 {
     UIView *view = objc_getAssociatedObject(self, @selector(dsl_indicatorView));
     if (!view) {
-        view = self.dsl_indicatorView = [self dsl_createIndicatorView];
+        self.dsl_indicatorView = view = [[UIView alloc] init];
+        [self.dsl_indicatorContentView addSubview:view];
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_indicatorContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+        [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:kIndicatorSize]];
+        [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:kIndicatorSize]];
     }
     return view;
 }
@@ -159,7 +195,14 @@ static CGFloat const kIndicatorSize = 30;
 {
     UILabel *label = objc_getAssociatedObject(self, @selector(dsl_indicatorMsgLable));
     if (!label) {
-        label = self.dsl_indicatorMsgLable = [self dsl_createIndicatorMsgLabel];
+        self.dsl_indicatorMsgLable = label = [[UILabel alloc] init];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.numberOfLines = 0;
+        label.font = [UIFont systemFontOfSize:15];
+        label.textColor = UIColorFromRGB(0x666666);
+        [self.dsl_indicatorContentView addSubview:label];
+        label.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_indicatorContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return label;
 }
@@ -173,7 +216,16 @@ static CGFloat const kIndicatorSize = 30;
 {
     UIView *view = objc_getAssociatedObject(self, @selector(dsl_indicatorContentView));
     if (!view) {
-        view = self.dsl_indicatorContentView = [self dsl_createIndicatorContentView];
+        self.dsl_indicatorContentView = view = [[UIView alloc] init];
+        view.backgroundColor = [UIColor clearColor];
+        [self addSubview:view];
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)]];
+        //兼容scrollView及其子类
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
+        view.hidden = YES;
     }
     return view;
 }
@@ -413,108 +465,6 @@ static CGFloat const kIndicatorSize = 30;
 {
     UIView *view = objc_getAssociatedObject(self, @selector(dsl_indicatorContentView));
     view.hidden = YES;
-}
-
-#pragma mark - create UI
-
-- (UILabel *)dsl_createMsgLabel
-{
-    UILabel *label = [[UILabel alloc] init];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.numberOfLines = 0;
-    label.textColor = UIColorFromRGB(0x666666);
-    [self.dsl_msgContentView addSubview:label];
-    label.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    return label;
-}
-
-- (UILabel *)dsl_createSubMsgLabel
-{
-    UILabel *label = [[UILabel alloc] init];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.numberOfLines = 0;
-    label.textColor = UIColorFromRGB(0x999999);
-    [self.dsl_msgContentView addSubview:label];
-    label.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    return label;
-}
-
-- (UIButton *)dsl_createButton
-{
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.backgroundColor = [UIColor whiteColor];
-    [button setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:16];
-    button.layer.cornerRadius = 5;
-    button.layer.masksToBounds = YES;
-    button.layer.borderColor = UIColorFromRGB(0x666666).CGColor;
-    button.layer.borderWidth = 1;
-    [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.dsl_msgContentView addSubview:button];
-    button.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    return button;
-}
-
-- (UIImageView *)dsl_createImageView
-{
-    UIImageView *iv = [[UIImageView alloc] init];
-    [self.dsl_msgContentView addSubview:iv];
-    iv.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:iv attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    return iv;
-}
-
-- (UIView *)dsl_createMsgContentView
-{
-    UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor clearColor];
-    [self addSubview:view];
-    view.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    view.hidden = YES;
-    return view;
-}
-
-- (UIView *)dsl_createIndicatorView
-{
-    UIView *view = [[UIView alloc] init];
-    [self.dsl_indicatorContentView addSubview:view];
-    view.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_indicatorContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:kIndicatorSize]];
-    [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:kIndicatorSize]];
-    return view;
-}
-
-- (UILabel *)dsl_createIndicatorMsgLabel
-{
-    UILabel *label = [[UILabel alloc] init];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.numberOfLines = 0;
-    label.font = [UIFont systemFontOfSize:15];
-    label.textColor = UIColorFromRGB(0x666666);
-    [self.dsl_indicatorContentView addSubview:label];
-    label.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_indicatorContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    return label;
-}
-
-- (UIView *)dsl_createIndicatorContentView
-{
-    UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor clearColor];
-    [self addSubview:view];
-    view.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)]];
-    //兼容scrollView及其子类
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-    view.hidden = YES;
-    return view;
 }
 
 #pragma mark - Action
