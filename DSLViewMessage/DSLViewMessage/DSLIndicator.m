@@ -74,7 +74,7 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
 
 #pragma mark - layer & animation
 
-- (CAShapeLayer *)layerForStyle_0
+- (CAShapeLayer *)layerForStyle_3
 {
     CAShapeLayer *layer = [CAShapeLayer layer];
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(_size / 2, _size / 2)
@@ -176,7 +176,7 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     return layer;
 }
 
-- (CALayer *)layerForStyle_3
+- (CALayer *)layerForStyle_0
 {
     CGFloat size = _size + 20;
     CGFloat dotSize = 10;
