@@ -46,3 +46,4 @@
 
 ![](https://github.com/dengshunlai/DSLViewMessage/raw/master/showMessage.png)
 ![](https://github.com/dengshunlai/DSLViewMessage/raw/master/showIndicator.png)
+![](https://github.com/dengshunlai/DSLViewMessage/raw/master/activityIndicator.png)
