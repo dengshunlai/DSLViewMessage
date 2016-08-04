@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DSLIndicator.h"
+#import "DSLViewMessageManager.h"
 
 /******************************************************************************************************************************
  *
@@ -87,6 +88,9 @@ typedef void(^ButtonClickBlock)(UIButton *button);
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style
                           message:(NSString *)message
                             limit:(BOOL)isLimit;
+
+- (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style
+                           message:(NSString *)messgae;
 
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style
                             limit:(BOOL)isLimit;

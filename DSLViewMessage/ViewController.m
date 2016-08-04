@@ -29,9 +29,14 @@
 
 - (IBAction)A:(UIBarButtonItem *)sender {
     //完整的显示方法
-    [self.tableView dsl_showMessage:@"请检查网络链接" subMessage:@"加载失败" image:[UIImage imageNamed:@"error"] buttonText:@"点击重新加载" buttonClickBlock:^(UIButton *button) {
-        NSLog(@"click button!");
-    } yOffset:0];
+    [self.tableView dsl_showMessage:@"请检查网络链接"
+                         subMessage:@"加载失败"
+                              image:[UIImage imageNamed:@"error"]
+                         buttonText:@"点击重新加载"
+                   buttonClickBlock:^(UIButton *button) {
+                                        NSLog(@"click button!");
+                                    }
+                            yOffset:0];
 }
 
 - (IBAction)B:(UIBarButtonItem *)sender {
@@ -58,16 +63,7 @@
 }
 
 - (IBAction)indicator:(UIBarButtonItem *)sender {
-    [self.tableView dsl_showIndicatorWithStyle:DSLIndicatorStyle_0];
-    
-//    [self.tableView dsl_showIndicatorWithMessage:@"加载中"];
-    
-//    [[UIApplication sharedApplication].keyWindow dsl_showIndicatorWithMessage:@"限制交互" limit:YES];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [[UIApplication sharedApplication].keyWindow dsl_removeIndicator];
-//    });
-    
-//    [self.tableView dsl_showIndicatorWithParams:@(0),@"请等待",@(NO),@(0), nil];
+    [self.tableView dsl_showIndicatorWithStyle:DSLIndicatorStyle_0 message:@"载入中"];
 }
 
 #pragma mark - UITableViewDataSource

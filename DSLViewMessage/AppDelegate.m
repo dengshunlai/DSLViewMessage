@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "DSLViewMessageManager.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    //设置属性
+    //DSLViewMessageManager *vmManager = [DSLViewMessageManager sharedInstance];
+    //vmManager.indicatorTintColor = [UIColor orangeColor];
+    
     return YES;
 }
 

@@ -12,14 +12,15 @@ typedef NS_ENUM(NSInteger, DSLIndicatorStyle) {
     DSLIndicatorStyle_0 = 0,
     DSLIndicatorStyle_1,
     DSLIndicatorStyle_2,
-    DSLIndicatorStyle_3
+    DSLIndicatorStyle_3,
+    DSLIndicatorStyle_4
 };
 
 @interface DSLIndicator : UIView
 
 + (DSLIndicator *)indicatorWithStyle:(DSLIndicatorStyle)style;
 
-+ (DSLIndicator *)indicatorWithStyle:(DSLIndicatorStyle)style size:(CGFloat)size;
++ (DSLIndicator *)indicatorWithStyle:(DSLIndicatorStyle)style size:(CGFloat)size color:(UIColor *)color;
 
 - (void)starAnimation;
 

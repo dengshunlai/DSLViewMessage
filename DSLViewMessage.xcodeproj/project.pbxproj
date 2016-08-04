@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D622EA741D3789D4002EDA78 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622EA731D3789D4002EDA78 /* error@2x.png */; };
+		D63A0A911D52E698000F78E6 /* DSLViewMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D63A0A901D52E698000F78E6 /* DSLViewMessageManager.m */; };
 		DD1176991D39F2C3009EC045 /* DSLIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = DD1176981D39F2C3009EC045 /* DSLIndicator.m */; };
 		DD3EAC971D36952F00632982 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EAC961D36952F00632982 /* main.m */; };
 		DD3EAC9A1D36952F00632982 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EAC991D36952F00632982 /* AppDelegate.m */; };
@@ -39,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		D622EA731D3789D4002EDA78 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
+		D63A0A8F1D52E698000F78E6 /* DSLViewMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLViewMessageManager.h; sourceTree = "<group>"; };
+		D63A0A901D52E698000F78E6 /* DSLViewMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLViewMessageManager.m; sourceTree = "<group>"; };
 		DD1176971D39F2C3009EC045 /* DSLIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLIndicator.h; sourceTree = "<group>"; };
 		DD1176981D39F2C3009EC045 /* DSLIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLIndicator.m; sourceTree = "<group>"; };
 		DD3EAC921D36952F00632982 /* DSLViewMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSLViewMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +160,8 @@
 				DD3EACCA1D36959200632982 /* UIView+DSLMessage.m */,
 				DD1176971D39F2C3009EC045 /* DSLIndicator.h */,
 				DD1176981D39F2C3009EC045 /* DSLIndicator.m */,
+				D63A0A8F1D52E698000F78E6 /* DSLViewMessageManager.h */,
+				D63A0A901D52E698000F78E6 /* DSLViewMessageManager.m */,
 			);
 			path = DSLViewMessage;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D63A0A911D52E698000F78E6 /* DSLViewMessageManager.m in Sources */,
 				DD3EAC9D1D36952F00632982 /* ViewController.m in Sources */,
 				DD3EAC9A1D36952F00632982 /* AppDelegate.m in Sources */,
 				DD1176991D39F2C3009EC045 /* DSLIndicator.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "DSLIndicator.h"
+#import "DSLViewMessageManager.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -19,6 +20,7 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
 @interface DSLIndicator ()
 
 @property (assign, nonatomic) CGFloat size;
+@property (strong, nonatomic) UIColor *color;
 @property (assign, nonatomic) DSLIndicatorStyle style;
 
 @property (assign, nonatomic) CALayer *indicatorLayer;
@@ -39,25 +41,37 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
 
 + (DSLIndicator *)indicatorWithStyle:(DSLIndicatorStyle)style
 {
-    return [self indicatorWithStyle:style size:kSize];
+    return [self indicatorWithStyle:style size:kSize color:UIColorFromRGB(0x0080ff)];
 }
 
-+ (DSLIndicator *)indicatorWithStyle:(DSLIndicatorStyle)style size:(CGFloat)size
++ (DSLIndicator *)indicatorWithStyle:(DSLIndicatorStyle)style size:(CGFloat)size color:(UIColor *)color
 {
     DSLIndicator *indicator = [[DSLIndicator alloc] initWithFrame:CGRectMake(0, 0, size, size)];
     indicator.size = size;
+    indicator.color = color;
     indicator.style = style;
     return indicator;
 }
 
 - (void)starAnimation
 {
+    if (_style == 0) {
+        DSLViewMessageManager *manager = [DSLViewMessageManager sharedInstance];
+        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:manager.activityIndicatorViewStyle];
+        activityView.frame = CGRectMake(0, 0, _size, _size);
+        [self addSubview:activityView];
+        [activityView startAnimating];
+        return ;
+    }
     _indicatorLayer = [self layerWithStyle:_style];
     [self.layer addSublayer:_indicatorLayer];
 }
 
 - (void)removeAnimation
 {
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
     [_indicatorLayer removeAllAnimations];
 }
 
@@ -74,109 +88,7 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
 
 #pragma mark - layer & animation
 
-- (CAShapeLayer *)layerForStyle_3
-{
-    CAShapeLayer *layer = [CAShapeLayer layer];
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(_size / 2, _size / 2)
-                                                        radius:_size / 2 - 1
-                                                    startAngle:0
-                                                      endAngle:1.8 * M_PI
-                                                     clockwise:YES];
-    path.lineWidth = 2;
-    layer.path = path.CGPath;
-    layer.strokeColor = UIColorFromRGB(0x0080ff).CGColor;
-    layer.fillColor = [UIColor clearColor].CGColor;
-    layer.frame = CGRectMake(0, 0, _size, _size);
-    
-    CABasicAnimation *animation = [CABasicAnimation animation];
-    animation.keyPath = @"transform.rotation.z";
-    animation.fromValue = @(0);
-    animation.toValue = @(2 * M_PI);
-    animation.duration = 1;
-    animation.repeatCount = INFINITY;
-    animation.removedOnCompletion = NO;
-    
-    [layer addAnimation:animation forKey:@"style_0"];
-    return layer;
-}
-
-- (CAShapeLayer *)layerForStyle_1
-{
-    CAShapeLayer *layer = [CAShapeLayer layer];
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, _size, _size)];
-    layer.path = path.CGPath;
-    layer.fillColor = UIColorFromRGB(0x0080ff).CGColor;
-    layer.frame = CGRectMake(0, 0, _size, _size);
-    
-    CABasicAnimation *xAnimation = [CABasicAnimation animation];
-    xAnimation.keyPath = @"transform.rotation.x";
-    xAnimation.fromValue = @(0);
-    xAnimation.toValue = @(M_PI);
-    xAnimation.beginTime = 0;
-    xAnimation.duration = 0.6;
-    
-    CABasicAnimation *yAnimation = [CABasicAnimation animation];
-    yAnimation.keyPath = @"transform.rotation.y";
-    yAnimation.fromValue = @(0);
-    yAnimation.toValue = @(M_PI);
-    yAnimation.beginTime = 0.6;
-    yAnimation.duration = 0.6;
-    
-    CAAnimationGroup *group = [CAAnimationGroup animation];
-    group.animations = @[xAnimation, yAnimation];
-    group.duration = 1.2;
-    group.repeatCount = INFINITY;
-    group.removedOnCompletion = NO;
-    
-    [layer addAnimation:group forKey:@"style_1"];
-    return layer;
-}
-
-- (CAShapeLayer *)layerForStyle_2
-{
-    CAShapeLayer *layer = [CAShapeLayer layer];
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(_size / 2, _size / 2)
-                                                        radius:_size / 2 - 1
-                                                    startAngle:0
-                                                      endAngle:2 * M_PI
-                                                     clockwise:YES];
-    path.lineWidth = 2;
-    layer.path = path.CGPath;
-    layer.strokeColor = UIColorFromRGB(0x0080ff).CGColor;
-    layer.fillColor = [UIColor clearColor].CGColor;
-    layer.frame = CGRectMake(0, 0, _size, _size);
-    
-    CABasicAnimation *rotationAnimation = [CABasicAnimation animation];
-    rotationAnimation.keyPath = @"transform.rotation.z";
-    rotationAnimation.fromValue = @(0);
-    rotationAnimation.toValue = @(2 * M_PI);
-    
-    CABasicAnimation *strokeStartAnimation = [CABasicAnimation animation];
-    strokeStartAnimation.keyPath = @"strokeStart";
-    strokeStartAnimation.fromValue = @(0);
-    strokeStartAnimation.toValue = @(1);
-    strokeStartAnimation.beginTime = 0;
-    strokeStartAnimation.duration = 0.7;
-    
-    CABasicAnimation *strokeEndAnimation = [CABasicAnimation animation];
-    strokeEndAnimation.keyPath = @"strokeEnd";
-    strokeEndAnimation.fromValue = @(0);
-    strokeEndAnimation.toValue = @(1);
-    strokeEndAnimation.beginTime = 0.7;
-    strokeEndAnimation.duration = 0.7;
-    
-    CAAnimationGroup *group = [CAAnimationGroup animation];
-    group.animations = @[rotationAnimation, strokeStartAnimation, strokeEndAnimation];
-    group.duration = 1.4;
-    group.repeatDuration = INFINITY;
-    group.removedOnCompletion = NO;
-    group.timeOffset = .5;
-    
-    [layer addAnimation:group forKey:@"style_2"];
-    return layer;
-}
-
-- (CALayer *)layerForStyle_0
+- (CALayer *)layerForStyle_1
 {
     CGFloat size = _size + 20;
     CGFloat dotSize = 10;
@@ -228,6 +140,108 @@ static NSInteger const kStyle = DSLIndicatorStyle_0;
     
     [redCircleLayer addAnimation:redAnimation forKey:@"red"];
     [blueCircleLayer addAnimation:blueAnimation forKey:@"blue"];
+    return layer;
+}
+
+- (CAShapeLayer *)layerForStyle_2
+{
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(_size / 2, _size / 2)
+                                                        radius:_size / 2 - 1
+                                                    startAngle:0
+                                                      endAngle:1.6 * M_PI
+                                                     clockwise:YES];
+    path.lineWidth = 2;
+    layer.path = path.CGPath;
+    layer.strokeColor = _color.CGColor;
+    layer.fillColor = [UIColor clearColor].CGColor;
+    layer.frame = CGRectMake(0, 0, _size, _size);
+    
+    CABasicAnimation *animation = [CABasicAnimation animation];
+    animation.keyPath = @"transform.rotation.z";
+    animation.fromValue = @(0);
+    animation.toValue = @(2 * M_PI);
+    animation.duration = 1;
+    animation.repeatCount = INFINITY;
+    animation.removedOnCompletion = NO;
+    
+    [layer addAnimation:animation forKey:@"style_2"];
+    return layer;
+}
+
+- (CAShapeLayer *)layerForStyle_3
+{
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, _size, _size)];
+    layer.path = path.CGPath;
+    layer.fillColor = _color.CGColor;
+    layer.frame = CGRectMake(0, 0, _size, _size);
+    
+    CABasicAnimation *xAnimation = [CABasicAnimation animation];
+    xAnimation.keyPath = @"transform.rotation.x";
+    xAnimation.fromValue = @(0);
+    xAnimation.toValue = @(M_PI);
+    xAnimation.beginTime = 0;
+    xAnimation.duration = 0.6;
+    
+    CABasicAnimation *yAnimation = [CABasicAnimation animation];
+    yAnimation.keyPath = @"transform.rotation.y";
+    yAnimation.fromValue = @(0);
+    yAnimation.toValue = @(M_PI);
+    yAnimation.beginTime = 0.6;
+    yAnimation.duration = 0.6;
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.animations = @[xAnimation, yAnimation];
+    group.duration = 1.2;
+    group.repeatCount = INFINITY;
+    group.removedOnCompletion = NO;
+    
+    [layer addAnimation:group forKey:@"style_3"];
+    return layer;
+}
+
+- (CAShapeLayer *)layerForStyle_4
+{
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(_size / 2, _size / 2)
+                                                        radius:_size / 2 - 1
+                                                    startAngle:0
+                                                      endAngle:2 * M_PI
+                                                     clockwise:YES];
+    path.lineWidth = 2;
+    layer.path = path.CGPath;
+    layer.strokeColor = _color.CGColor;
+    layer.fillColor = [UIColor clearColor].CGColor;
+    layer.frame = CGRectMake(0, 0, _size, _size);
+    
+    CABasicAnimation *rotationAnimation = [CABasicAnimation animation];
+    rotationAnimation.keyPath = @"transform.rotation.z";
+    rotationAnimation.fromValue = @(0);
+    rotationAnimation.toValue = @(2 * M_PI);
+    
+    CABasicAnimation *strokeStartAnimation = [CABasicAnimation animation];
+    strokeStartAnimation.keyPath = @"strokeStart";
+    strokeStartAnimation.fromValue = @(0);
+    strokeStartAnimation.toValue = @(1);
+    strokeStartAnimation.beginTime = 0;
+    strokeStartAnimation.duration = 0.7;
+    
+    CABasicAnimation *strokeEndAnimation = [CABasicAnimation animation];
+    strokeEndAnimation.keyPath = @"strokeEnd";
+    strokeEndAnimation.fromValue = @(0);
+    strokeEndAnimation.toValue = @(1);
+    strokeEndAnimation.beginTime = 0.7;
+    strokeEndAnimation.duration = 0.7;
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.animations = @[rotationAnimation, strokeStartAnimation, strokeEndAnimation];
+    group.duration = 1.4;
+    group.repeatDuration = INFINITY;
+    group.removedOnCompletion = NO;
+    group.timeOffset = .5;
+    
+    [layer addAnimation:group forKey:@"style_4"];
     return layer;
 }
 

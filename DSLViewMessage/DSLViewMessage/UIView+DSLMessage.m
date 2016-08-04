@@ -14,8 +14,6 @@ colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-static CGFloat const kIndicatorSize = 30;
-
 @interface UIView ()
 
 @property (strong, nonatomic) UIImageView *dsl_msgImageView;
@@ -180,8 +178,6 @@ static CGFloat const kIndicatorSize = 30;
         [self.dsl_indicatorContentView addSubview:view];
         view.translatesAutoresizingMaskIntoConstraints = NO;
         [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_indicatorContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-        [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:kIndicatorSize]];
-        [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:kIndicatorSize]];
     }
     return view;
 }
@@ -199,7 +195,7 @@ static CGFloat const kIndicatorSize = 30;
         label.textAlignment = NSTextAlignmentCenter;
         label.numberOfLines = 0;
         label.font = [UIFont systemFontOfSize:15];
-        label.textColor = UIColorFromRGB(0x666666);
+        label.textColor = UIColorFromRGB(0x888888);
         [self.dsl_indicatorContentView addSubview:label];
         label.translatesAutoresizingMaskIntoConstraints = NO;
         [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_indicatorContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
@@ -384,6 +380,11 @@ static CGFloat const kIndicatorSize = 30;
     [self dsl_showIndicatorWithStyle:style message:nil limit:isLimit yOffset:0];
 }
 
+- (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style message:(NSString *)message
+{
+    [self dsl_showIndicatorWithStyle:style message:message limit:NO yOffset:0];
+}
+
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style message:(NSString *)message limit:(BOOL)isLimit
 {
     [self dsl_showIndicatorWithStyle:style message:message limit:isLimit yOffset:0];
@@ -429,7 +430,8 @@ static CGFloat const kIndicatorSize = 30;
     for (UIView *view in self.dsl_indicatorView.subviews) {
         [view removeFromSuperview];
     }
-    DSLIndicator *indicator = [DSLIndicator indicatorWithStyle:style size:kIndicatorSize];
+    DSLViewMessageManager *manager = [DSLViewMessageManager sharedInstance];
+    DSLIndicator *indicator = [DSLIndicator indicatorWithStyle:style size:manager.indicatorSize color:manager.indicatorTintColor];
     [self.dsl_indicatorView addSubview:indicator];
     indicator.translatesAutoresizingMaskIntoConstraints = NO;
     [self.dsl_indicatorView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[indicator]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(indicator)]];
@@ -439,12 +441,26 @@ static CGFloat const kIndicatorSize = 30;
     
     NSMutableArray *tempArr = @[].mutableCopy;
     [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
+                                                    attribute:NSLayoutAttributeWidth
+                                                    relatedBy:NSLayoutRelationEqual
+                                                       toItem:nil
+                                                    attribute:0
+                                                   multiplier:1
+                                                     constant:manager.indicatorSize]];
+    [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
+                                                    attribute:NSLayoutAttributeHeight
+                                                    relatedBy:NSLayoutRelationEqual
+                                                       toItem:nil
+                                                    attribute:0
+                                                   multiplier:1
+                                                     constant:manager.indicatorSize]];
+    [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
                                                     attribute:NSLayoutAttributeCenterY
                                                     relatedBy:NSLayoutRelationEqual
                                                        toItem:self.dsl_indicatorContentView
                                                     attribute:NSLayoutAttributeCenterY
                                                    multiplier:1
-                                                     constant:(message.length ? -kIndicatorSize / 2 - 8 : 0) + yOffset]];
+                                                     constant:(message.length ? -manager.indicatorSize / 2 - 8 : 0) + yOffset]];
     if (message.length) {
         [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorMsgLable
                                                         attribute:NSLayoutAttributeTop
@@ -459,6 +475,10 @@ static CGFloat const kIndicatorSize = 30;
     
     [indicator starAnimation];
     self.dsl_indicatorContentView.hidden = NO;
+    
+    if (isLimit) {
+        //TODO
+    }
 }
 
 - (void)dsl_removeIndicator
