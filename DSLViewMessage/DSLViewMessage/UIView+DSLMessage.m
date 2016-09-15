@@ -348,6 +348,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 {
     UIView *view = objc_getAssociatedObject(self, @selector(dsl_msgContentView));
     view.hidden = YES;
+    self.userInteractionEnabled = YES;
 }
 
 - (void)dsl_showIndicator
@@ -476,15 +477,14 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [indicator starAnimation];
     self.dsl_indicatorContentView.hidden = NO;
     
-    if (isLimit) {
-        //TODO
-    }
+    self.userInteractionEnabled = !isLimit;
 }
 
 - (void)dsl_removeIndicator
 {
     UIView *view = objc_getAssociatedObject(self, @selector(dsl_indicatorContentView));
     view.hidden = YES;
+    self.userInteractionEnabled = YES;
 }
 
 #pragma mark - Action
