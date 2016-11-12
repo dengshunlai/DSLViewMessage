@@ -353,17 +353,17 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 - (void)dsl_showIndicator
 {
-    [self dsl_showIndicatorWithStyle:DSLIndicatorStyle_0 message:nil limit:NO yOffset:0];
+    [self dsl_showIndicatorWithStyle:DSLIndicatorStyle_0 message:nil limit:YES yOffset:0];
 }
 
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style
 {
-    [self dsl_showIndicatorWithStyle:style message:nil limit:NO yOffset:0];
+    [self dsl_showIndicatorWithStyle:style message:nil limit:YES yOffset:0];
 }
 
 - (void)dsl_showIndicatorWithMessage:(NSString *)message
 {
-    [self dsl_showIndicatorWithStyle:DSLIndicatorStyle_0 message:message limit:NO yOffset:0];
+    [self dsl_showIndicatorWithStyle:DSLIndicatorStyle_0 message:message limit:YES yOffset:0];
 }
 
 - (void)dsl_showIndicatorWithLimit:(BOOL)isLimit
@@ -383,7 +383,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style message:(NSString *)message
 {
-    [self dsl_showIndicatorWithStyle:style message:message limit:NO yOffset:0];
+    [self dsl_showIndicatorWithStyle:style message:message limit:YES yOffset:0];
 }
 
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style message:(NSString *)message limit:(BOOL)isLimit
@@ -397,7 +397,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     va_start(ap, firstParam);
     DSLIndicatorStyle style = 0;
     NSString *message = nil;
-    BOOL limit = NO;
+    BOOL limit = YES;
     CGFloat yOffset = 0;
     int index = 0;
     for (id param = firstParam; param != nil; param = va_arg(ap, id)) {
