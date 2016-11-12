@@ -70,7 +70,7 @@ typedef void(^ButtonClickBlock)(UIButton *button);
  *
  *  @param style   指示器风格
  *  @param message 文本
- *  @param isLimit 是否限制交互，默认否
+ *  @param isLimit 是否限制交互，默认是
  *  @param yOffset y轴上的偏移，默认0
  */
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style
