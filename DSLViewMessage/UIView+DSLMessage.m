@@ -47,6 +47,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         label.textAlignment = NSTextAlignmentCenter;
         label.numberOfLines = 0;
         label.textColor = UIColorFromRGB(0x666666);
+        label.font = [UIFont systemFontOfSize:16];
         [self.dsl_msgContentView addSubview:label];
         label.translatesAutoresizingMaskIntoConstraints = NO;
         [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
@@ -67,6 +68,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         label.textAlignment = NSTextAlignmentCenter;
         label.numberOfLines = 0;
         label.textColor = UIColorFromRGB(0x999999);
+        label.font = [UIFont systemFontOfSize:16];
         [self.dsl_msgContentView addSubview:label];
         label.translatesAutoresizingMaskIntoConstraints = NO;
         [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
@@ -248,6 +250,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [self dsl_showMessage:message subMessage:nil image:nil buttonText:nil buttonClickBlock:nil yOffset:0];
 }
 
+- (void)dsl_showMessage:(NSString *)message yOffset:(CGFloat)yOffset
+{
+    [self dsl_showMessage:message subMessage:nil image:nil buttonText:nil buttonClickBlock:nil yOffset:yOffset];
+}
+
 - (void)dsl_showMessage:(NSString *)message
              subMessage:(NSString *)subMessage
                   image:(UIImage *)image
@@ -337,6 +344,12 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     NSMutableArray *tempArr = @[].mutableCopy;
     [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:size.width]];
     [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:size.height]];
+    if ([self isKindOfClass:[UIScrollView class]]) {
+        UIScrollView *sv = (UIScrollView *)self;
+        if (sv.contentInset.top >= 64) {
+            yOffset = yOffset - 64;
+        }
+    }
     [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:yOffset]];
     self.dsl_msgSelfConstraints = tempArr;
     [self addConstraints:self.dsl_msgSelfConstraints];
@@ -440,6 +453,12 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     
     [self.dsl_indicatorContentView removeConstraints:self.dsl_indicatorContentViewConstraints];
     
+    if ([self isKindOfClass:[UIScrollView class]]) {
+        UIScrollView *sv = (UIScrollView *)self;
+        if (sv.contentInset.top >= 64) {
+            yOffset = yOffset - 64;
+        }
+    }
     NSMutableArray *tempArr = @[].mutableCopy;
     [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
                                                     attribute:NSLayoutAttributeWidth

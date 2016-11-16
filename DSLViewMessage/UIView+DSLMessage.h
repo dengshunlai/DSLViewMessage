@@ -58,6 +58,9 @@ typedef void(^ButtonClickBlock)(UIButton *button);
              subMessage:(NSString *)subMessage
                   image:(UIImage *)image;
 
+- (void)dsl_showMessage:(NSString *)message
+                yOffset:(CGFloat)yOffset;
+
 - (void)dsl_showMessage:(NSString *)message;
 
 /**
