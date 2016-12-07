@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D614A6951DF7A7F60020DDDC /* DSLIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = D614A6901DF7A7F60020DDDC /* DSLIndicator.m */; };
+		D614A6961DF7A7F60020DDDC /* DSLViewMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D614A6921DF7A7F60020DDDC /* DSLViewMessageManager.m */; };
+		D614A6971DF7A7F60020DDDC /* UIView+DSLMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D614A6941DF7A7F60020DDDC /* UIView+DSLMessage.m */; };
+		D614A6991DF7A8000020DDDC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D614A6981DF7A8000020DDDC /* README.md */; };
 		D622EA741D3789D4002EDA78 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622EA731D3789D4002EDA78 /* error@2x.png */; };
-		D6A3EDBE1DDC01A400711F8A /* DSLIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A3EDB91DDC01A400711F8A /* DSLIndicator.m */; };
-		D6A3EDBF1DDC01A400711F8A /* DSLViewMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A3EDBB1DDC01A400711F8A /* DSLViewMessageManager.m */; };
-		D6A3EDC01DDC01A400711F8A /* UIView+DSLMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A3EDBD1DDC01A400711F8A /* UIView+DSLMessage.m */; };
 		DD3EAC971D36952F00632982 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EAC961D36952F00632982 /* main.m */; };
 		DD3EAC9A1D36952F00632982 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EAC991D36952F00632982 /* AppDelegate.m */; };
 		DD3EAC9D1D36952F00632982 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3EAC9C1D36952F00632982 /* ViewController.m */; };
@@ -39,13 +40,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D614A68F1DF7A7F60020DDDC /* DSLIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLIndicator.h; sourceTree = "<group>"; };
+		D614A6901DF7A7F60020DDDC /* DSLIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLIndicator.m; sourceTree = "<group>"; };
+		D614A6911DF7A7F60020DDDC /* DSLViewMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLViewMessageManager.h; sourceTree = "<group>"; };
+		D614A6921DF7A7F60020DDDC /* DSLViewMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLViewMessageManager.m; sourceTree = "<group>"; };
+		D614A6931DF7A7F60020DDDC /* UIView+DSLMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DSLMessage.h"; sourceTree = "<group>"; };
+		D614A6941DF7A7F60020DDDC /* UIView+DSLMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DSLMessage.m"; sourceTree = "<group>"; };
+		D614A6981DF7A8000020DDDC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D622EA731D3789D4002EDA78 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
-		D6A3EDB81DDC01A400711F8A /* DSLIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLIndicator.h; sourceTree = "<group>"; };
-		D6A3EDB91DDC01A400711F8A /* DSLIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLIndicator.m; sourceTree = "<group>"; };
-		D6A3EDBA1DDC01A400711F8A /* DSLViewMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLViewMessageManager.h; sourceTree = "<group>"; };
-		D6A3EDBB1DDC01A400711F8A /* DSLViewMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLViewMessageManager.m; sourceTree = "<group>"; };
-		D6A3EDBC1DDC01A400711F8A /* UIView+DSLMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DSLMessage.h"; sourceTree = "<group>"; };
-		D6A3EDBD1DDC01A400711F8A /* UIView+DSLMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DSLMessage.m"; sourceTree = "<group>"; };
 		DD3EAC921D36952F00632982 /* DSLViewMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSLViewMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3EAC961D36952F00632982 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DD3EAC981D36952F00632982 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -89,22 +91,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D6A3EDB71DDC01A400711F8A /* DSLViewMessage */ = {
+		D614A68E1DF7A7F60020DDDC /* DSLViewMessage */ = {
 			isa = PBXGroup;
 			children = (
-				D6A3EDB81DDC01A400711F8A /* DSLIndicator.h */,
-				D6A3EDB91DDC01A400711F8A /* DSLIndicator.m */,
-				D6A3EDBA1DDC01A400711F8A /* DSLViewMessageManager.h */,
-				D6A3EDBB1DDC01A400711F8A /* DSLViewMessageManager.m */,
-				D6A3EDBC1DDC01A400711F8A /* UIView+DSLMessage.h */,
-				D6A3EDBD1DDC01A400711F8A /* UIView+DSLMessage.m */,
+				D614A68F1DF7A7F60020DDDC /* DSLIndicator.h */,
+				D614A6901DF7A7F60020DDDC /* DSLIndicator.m */,
+				D614A6911DF7A7F60020DDDC /* DSLViewMessageManager.h */,
+				D614A6921DF7A7F60020DDDC /* DSLViewMessageManager.m */,
+				D614A6931DF7A7F60020DDDC /* UIView+DSLMessage.h */,
+				D614A6941DF7A7F60020DDDC /* UIView+DSLMessage.m */,
 			);
 			path = DSLViewMessage;
-			sourceTree = SOURCE_ROOT;
+			sourceTree = "<group>";
 		};
 		DD3EAC891D36952F00632982 = {
 			isa = PBXGroup;
 			children = (
+				D614A6981DF7A8000020DDDC /* README.md */,
+				D614A68E1DF7A7F60020DDDC /* DSLViewMessage */,
 				DD3EAC941D36952F00632982 /* DSLViewMessageExample */,
 				DD3EACAE1D36952F00632982 /* DSLViewMessageTests */,
 				DD3EACB91D36952F00632982 /* DSLViewMessageUITests */,
@@ -125,7 +129,6 @@
 		DD3EAC941D36952F00632982 /* DSLViewMessageExample */ = {
 			isa = PBXGroup;
 			children = (
-				D6A3EDB71DDC01A400711F8A /* DSLViewMessage */,
 				DD3EAC981D36952F00632982 /* AppDelegate.h */,
 				DD3EAC991D36952F00632982 /* AppDelegate.m */,
 				DD3EAC9B1D36952F00632982 /* ViewController.h */,
@@ -298,12 +301,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6A3EDC01DDC01A400711F8A /* UIView+DSLMessage.m in Sources */,
+				D614A6971DF7A7F60020DDDC /* UIView+DSLMessage.m in Sources */,
 				DD3EAC9D1D36952F00632982 /* ViewController.m in Sources */,
-				D6A3EDBE1DDC01A400711F8A /* DSLIndicator.m in Sources */,
+				D614A6951DF7A7F60020DDDC /* DSLIndicator.m in Sources */,
+				D614A6991DF7A8000020DDDC /* README.md in Sources */,
 				DD3EAC9A1D36952F00632982 /* AppDelegate.m in Sources */,
 				DD3EAC971D36952F00632982 /* main.m in Sources */,
-				D6A3EDBF1DDC01A400711F8A /* DSLViewMessageManager.m in Sources */,
+				D614A6961DF7A7F60020DDDC /* DSLViewMessageManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

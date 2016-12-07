@@ -22,16 +22,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 @property (strong, nonatomic) UILabel *dsl_subMsgLable;
 @property (strong, nonatomic) UIView *dsl_msgContentView;
 
-@property (strong, nonatomic) NSArray *dsl_msgContentViewConstraints;
-@property (strong, nonatomic) NSArray *dsl_msgSelfConstraints;
-
 @property (copy, nonatomic) ButtonClickBlock dsl_msgButtonClickBlock;
 
 @property (strong, nonatomic) UIView *dsl_indicatorView;
 @property (strong, nonatomic) UIView *dsl_indicatorContentView;
 @property (strong, nonatomic) UILabel *dsl_indicatorMsgLable;
-
-@property (strong, nonatomic) NSArray *dsl_indicatorContentViewConstraints;
 
 @end
 
@@ -50,7 +45,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         label.font = [UIFont systemFontOfSize:16];
         [self.dsl_msgContentView addSubview:label];
         label.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return label;
 }
@@ -71,7 +65,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         label.font = [UIFont systemFontOfSize:16];
         [self.dsl_msgContentView addSubview:label];
         label.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return label;
 }
@@ -96,7 +89,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.dsl_msgContentView addSubview:button];
         button.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return button;
 }
@@ -113,7 +105,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         self.dsl_msgImageView = iv = [[UIImageView alloc] init];
         [self.dsl_msgContentView addSubview:iv];
         iv.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:iv attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return iv;
 }
@@ -131,7 +122,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         view.backgroundColor = [UIColor clearColor];
         [self addSubview:view];
         view.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
         view.hidden = YES;
     }
     return view;
@@ -140,26 +130,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 - (void)setDsl_msgContentView:(UIView *)dsl_msgContentView
 {
     objc_setAssociatedObject(self, @selector(dsl_msgContentView), dsl_msgContentView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSArray *)dsl_msgContentViewConstraints
-{
-    return objc_getAssociatedObject(self, @selector(dsl_msgContentViewConstraints));
-}
-
-- (void)setDsl_msgContentViewConstraints:(NSArray *)dsl_msgContentViewConstraints
-{
-    objc_setAssociatedObject(self, @selector(dsl_msgContentViewConstraints), dsl_msgContentViewConstraints, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSArray *)dsl_msgSelfConstraints
-{
-    return objc_getAssociatedObject(self, @selector(dsl_msgSelfConstraints));
-}
-
-- (void)setDsl_msgSelfConstraints:(NSArray *)dsl_msgSelfConstraints
-{
-    objc_setAssociatedObject(self, @selector(dsl_msgSelfConstraints), dsl_msgSelfConstraints, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (ButtonClickBlock)dsl_msgButtonClickBlock
@@ -179,7 +149,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         self.dsl_indicatorView = view = [[UIView alloc] init];
         [self.dsl_indicatorContentView addSubview:view];
         view.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_indicatorContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return view;
 }
@@ -200,7 +169,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         label.textColor = UIColorFromRGB(0x888888);
         [self.dsl_indicatorContentView addSubview:label];
         label.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.dsl_indicatorContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return label;
 }
@@ -218,11 +186,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         view.backgroundColor = [UIColor clearColor];
         [self addSubview:view];
         view.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)]];
-        //兼容scrollView及其子类
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
         view.hidden = YES;
     }
     return view;
@@ -326,34 +289,81 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     self.dsl_msgImageView.image = image;
     self.dsl_msgButtonClickBlock = block;
     
-    [self.dsl_msgContentView removeConstraints:self.dsl_msgContentViewConstraints];
-    [self removeConstraints:self.dsl_msgSelfConstraints];
+    [self.dsl_msgContentView removeConstraints:self.dsl_msgContentView.constraints];
+    [self removeConstraints:self.constraints];
     
-    self.dsl_msgContentViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[dsl_msgImageView(imageViewHeight)]-8-[dsl_msgLable]-5-[dsl_subMsgLable]-7-[dsl_msgButton(buttonHeight)]-|"
-                                                                                 options:0
-                                                                                 metrics:@{@"imageViewHeight":@(image ? image.size.height : 0),
-                                                                                           @"buttonHeight":@(buttonText.length ? 32 : 0)}
-                                                                                   views:@{@"dsl_msgImageView":self.dsl_msgImageView,
-                                                                                           @"dsl_msgLable":self.dsl_msgLable,
-                                                                                           @"dsl_subMsgLable":self.dsl_subMsgLable,
-                                                                                           @"dsl_msgButton":self.dsl_msgButton}];
-    [self.dsl_msgContentView addConstraints:self.dsl_msgContentViewConstraints];
+    [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_msgLable
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.dsl_msgContentView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1
+                                                                         constant:0]];
+    [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_subMsgLable
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.dsl_msgContentView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1
+                                                                         constant:0]];
+    [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_msgButton
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.dsl_msgContentView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1
+                                                                         constant:0]];
+    [self.dsl_msgContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_msgImageView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.dsl_msgContentView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1
+                                                                         constant:0]];
+    [self.dsl_msgContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[dsl_msgImageView(imageViewHeight)]-8-[dsl_msgLable]-5-[dsl_subMsgLable]-7-[dsl_msgButton(buttonHeight)]-5-|"
+                                                                                    options:0
+                                                                                    metrics:@{@"imageViewHeight":@(image ? image.size.height : 0),
+                                                                                              @"buttonHeight":@(buttonText.length ? 32 : 0)}
+                                                                                      views:@{@"dsl_msgImageView":self.dsl_msgImageView,
+                                                                                              @"dsl_msgLable":self.dsl_msgLable,
+                                                                                              @"dsl_subMsgLable":self.dsl_subMsgLable,
+                                                                                              @"dsl_msgButton":self.dsl_msgButton}]];
     
     CGSize size = [self.dsl_msgContentView systemLayoutSizeFittingSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 20, 1000)];
-
-    NSMutableArray *tempArr = @[].mutableCopy;
-    [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:size.width]];
-    [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:size.height]];
+    
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView
+                                                     attribute:NSLayoutAttributeCenterX
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeCenterX
+                                                    multiplier:1
+                                                      constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView
+                                                     attribute:NSLayoutAttributeWidth
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil attribute:0
+                                                    multiplier:1
+                                                      constant:size.width]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView
+                                                     attribute:NSLayoutAttributeHeight
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:0
+                                                    multiplier:1
+                                                      constant:size.height]];
     if ([self isKindOfClass:[UIScrollView class]]) {
         UIScrollView *sv = (UIScrollView *)self;
         if (sv.contentInset.top >= 64) {
             yOffset = yOffset - 64;
         }
     }
-    [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:yOffset]];
-    self.dsl_msgSelfConstraints = tempArr;
-    [self addConstraints:self.dsl_msgSelfConstraints];
-    
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView
+                                                     attribute:NSLayoutAttributeCenterY
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeCenterY
+                                                    multiplier:1
+                                                      constant:yOffset]];
     self.dsl_msgContentView.hidden = NO;
 }
 
@@ -451,48 +461,76 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [self.dsl_indicatorView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[indicator]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(indicator)]];
     [self.dsl_indicatorView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[indicator]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(indicator)]];
     
-    [self.dsl_indicatorContentView removeConstraints:self.dsl_indicatorContentViewConstraints];
+    [self.dsl_indicatorContentView removeConstraints:self.dsl_indicatorContentView.constraints];
+    [self removeConstraints:self.constraints];
     
+    [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorMsgLable
+                                                                              attribute:NSLayoutAttributeCenterX
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.dsl_indicatorContentView
+                                                                              attribute:NSLayoutAttributeCenterX
+                                                                             multiplier:1
+                                                                               constant:0]];
+    [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
+                                                                              attribute:NSLayoutAttributeCenterX
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.dsl_indicatorContentView
+                                                                              attribute:NSLayoutAttributeCenterX
+                                                                             multiplier:1
+                                                                               constant:0]];
     if ([self isKindOfClass:[UIScrollView class]]) {
         UIScrollView *sv = (UIScrollView *)self;
         if (sv.contentInset.top >= 64) {
             yOffset = yOffset - 64;
         }
     }
-    NSMutableArray *tempArr = @[].mutableCopy;
-    [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
-                                                    attribute:NSLayoutAttributeWidth
-                                                    relatedBy:NSLayoutRelationEqual
-                                                       toItem:nil
-                                                    attribute:0
-                                                   multiplier:1
-                                                     constant:manager.indicatorSize]];
-    [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
-                                                    attribute:NSLayoutAttributeHeight
-                                                    relatedBy:NSLayoutRelationEqual
-                                                       toItem:nil
-                                                    attribute:0
-                                                   multiplier:1
-                                                     constant:manager.indicatorSize]];
-    [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
-                                                    attribute:NSLayoutAttributeCenterY
-                                                    relatedBy:NSLayoutRelationEqual
-                                                       toItem:self.dsl_indicatorContentView
-                                                    attribute:NSLayoutAttributeCenterY
-                                                   multiplier:1
-                                                     constant:(message.length ? -manager.indicatorSize / 2 - 8 : 0) + yOffset]];
+    [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
+                                                                              attribute:NSLayoutAttributeWidth
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:nil
+                                                                              attribute:0
+                                                                             multiplier:1
+                                                                               constant:manager.indicatorSize]];
+    [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
+                                                                              attribute:NSLayoutAttributeHeight
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:nil
+                                                                              attribute:0
+                                                                             multiplier:1
+                                                                               constant:manager.indicatorSize]];
+    [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
+                                                                              attribute:NSLayoutAttributeCenterY
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.dsl_indicatorContentView
+                                                                              attribute:NSLayoutAttributeCenterY
+                                                                             multiplier:1
+                                                                               constant:(message.length ? -manager.indicatorSize / 2 - 8 : 0) + yOffset]];
     if (message.length) {
-        [tempArr addObject:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorMsgLable
-                                                        attribute:NSLayoutAttributeTop
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:self.dsl_indicatorContentView
-                                                        attribute:NSLayoutAttributeCenterY
-                                                       multiplier:1
-                                                         constant:yOffset]];
+        [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorMsgLable
+                                                                                  attribute:NSLayoutAttributeTop
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:self.dsl_indicatorContentView
+                                                                                  attribute:NSLayoutAttributeCenterY
+                                                                                 multiplier:1
+                                                                                   constant:yOffset]];
     }
-    self.dsl_indicatorContentViewConstraints = tempArr;
-    [self.dsl_indicatorContentView addConstraints:self.dsl_indicatorContentViewConstraints];
-    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[dsl_indicatorContentView]|" options:0 metrics:nil views:@{@"dsl_indicatorContentView":self.dsl_indicatorContentView}]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[dsl_indicatorContentView]|" options:0 metrics:nil views:@{@"dsl_indicatorContentView":self.dsl_indicatorContentView}]];
+    //兼容scrollView及其子类
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorContentView
+                                                     attribute:NSLayoutAttributeWidth
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeWidth
+                                                    multiplier:1
+                                                      constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorContentView
+                                                     attribute:NSLayoutAttributeHeight
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeHeight
+                                                    multiplier:1
+                                                      constant:0]];
     [indicator starAnimation];
     self.dsl_indicatorContentView.hidden = NO;
     

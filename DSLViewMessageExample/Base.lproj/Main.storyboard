@@ -18,23 +18,7 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x3Z-6R-6Se">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <sections/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="0ol-OU-buH"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="cuT-Fd-fmd"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="x3Z-6R-6Se" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="f6o-wh-biY"/>
-                            <constraint firstAttribute="trailing" secondItem="x3Z-6R-6Se" secondAttribute="trailing" id="ggQ-Gs-Alq"/>
-                            <constraint firstAttribute="bottom" secondItem="x3Z-6R-6Se" secondAttribute="bottom" id="hOX-Gb-EgG"/>
-                            <constraint firstItem="x3Z-6R-6Se" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="s4t-LU-mAT"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cGx-BT-1Vk">
                         <leftBarButtonItems>
@@ -77,9 +61,6 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="x3Z-6R-6Se" id="uNj-h3-2FM"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

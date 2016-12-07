@@ -11,7 +11,8 @@
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UITableView *tableView;
 
 @end
 
@@ -19,6 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    [self.view addSubview:_tableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,7 +68,7 @@
 }
 
 - (IBAction)indicator:(UIBarButtonItem *)sender {
-    [self.tableView dsl_showIndicatorWithStyle:DSLIndicatorStyle_0 message:@"载入中"];
+    [self.tableView dsl_showIndicatorWithStyle:DSLIndicatorStyle_0 message:@"载入中" limit:NO];
 }
 
 #pragma mark - UITableViewDataSource
