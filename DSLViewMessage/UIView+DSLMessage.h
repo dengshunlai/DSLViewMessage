@@ -92,6 +92,10 @@ typedef void(^ButtonClickBlock)(UIButton *button);
                           message:(NSString *)message
                             limit:(BOOL)isLimit;
 
+- (void)dsl_showIndicatorWithMessage:(NSString *)message
+                               limit:(BOOL)isLimit
+                             yOffset:(CGFloat)yOffset;
+
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style
                            message:(NSString *)messgae;
 

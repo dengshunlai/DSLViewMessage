@@ -417,6 +417,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [self dsl_showIndicatorWithStyle:style message:message limit:YES yOffset:0];
 }
 
+- (void)dsl_showIndicatorWithMessage:(NSString *)message limit:(BOOL)isLimit yOffset:(CGFloat)yOffset
+{
+    [self dsl_showIndicatorWithStyle:DSLIndicatorStyle_0 message:message limit:isLimit yOffset:yOffset];
+}
+
 - (void)dsl_showIndicatorWithStyle:(DSLIndicatorStyle)style message:(NSString *)message limit:(BOOL)isLimit
 {
     [self dsl_showIndicatorWithStyle:style message:message limit:isLimit yOffset:0];
