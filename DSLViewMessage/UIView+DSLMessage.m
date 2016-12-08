@@ -352,10 +352,18 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
                                                     multiplier:1
                                                       constant:size.height]];
     if ([self isKindOfClass:[UIScrollView class]]) {
-        UIScrollView *sv = (UIScrollView *)self;
-        if (sv.contentInset.top >= 64) {
-            yOffset = yOffset - 64;
-        }
+        UIResponder *responder = self;
+        do {
+            if ([responder isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *nc = (UINavigationController *)responder;
+                if (nc.navigationBar.translucent == YES) {
+                    yOffset = yOffset - 64;
+                }
+                break;
+            } else {
+                responder = responder.nextResponder;
+            }
+        } while (responder);
     }
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_msgContentView
                                                      attribute:NSLayoutAttributeCenterY
@@ -479,10 +487,18 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
                                                                              multiplier:1
                                                                                constant:0]];
     if ([self isKindOfClass:[UIScrollView class]]) {
-        UIScrollView *sv = (UIScrollView *)self;
-        if (sv.contentInset.top >= 64) {
-            yOffset = yOffset - 64;
-        }
+        UIResponder *responder = self;
+        do {
+            if ([responder isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *nc = (UINavigationController *)responder;
+                if (nc.navigationBar.translucent == YES) {
+                    yOffset = yOffset - 64;
+                }
+                break;
+            } else {
+                responder = responder.nextResponder;
+            }
+        } while (responder);
     }
     [self.dsl_indicatorContentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dsl_indicatorView
                                                                               attribute:NSLayoutAttributeWidth
