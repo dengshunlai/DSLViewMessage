@@ -1,7 +1,7 @@
 # DSLViewMessage
-用法：
-#import "UIView+DSLMessage.h"
+### 用法：
 ```
+#import "UIView+DSLMessage.h"
 /**
  *  信息显示方法，不需要的部分传nil/0
  *
@@ -42,7 +42,7 @@
  */
 - (void)dsl_removeIndicator;
 ```
-##效果图：
+### 效果图：
 
 ![](https://github.com/dengshunlai/DSLViewMessage/raw/master/showMessage.png)
 ![](https://github.com/dengshunlai/DSLViewMessage/raw/master/activityIndicator.png)
