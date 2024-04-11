@@ -18,6 +18,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    if (@available(iOS 13.0, *)) {
+        UINavigationBar *nbAppearance = [UINavigationBar appearance];
+        UINavigationBarAppearance *nbStandarAppearance = [[UINavigationBarAppearance alloc] init];
+        nbStandarAppearance.backgroundColor = [UIColor whiteColor];
+        nbAppearance.standardAppearance = nbStandarAppearance;
+        nbAppearance.compactAppearance = nbStandarAppearance;
+        nbAppearance.scrollEdgeAppearance = nbStandarAppearance;
+    }
+    if (@available(iOS 11.0, *)) {
+        [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
     //设置属性
     //DSLViewMessageManager *vmManager = [DSLViewMessageManager sharedInstance];
     //vmManager.indicatorTintColor = [UIColor orangeColor];

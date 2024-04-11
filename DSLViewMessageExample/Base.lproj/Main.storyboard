@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rLP-zu-EB9">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rLP-zu-EB9">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,23 +16,23 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="cGx-BT-1Vk">
                         <leftBarButtonItems>
-                            <barButtonItem title="A" id="pd5-6S-pHX">
+                            <barButtonItem title=" A " id="pd5-6S-pHX">
                                 <connections>
                                     <action selector="A:" destination="BYZ-38-t0r" id="d7K-SJ-aSi"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="B" id="dGc-PT-FXG">
+                            <barButtonItem title=" B " id="dGc-PT-FXG">
                                 <connections>
                                     <action selector="B:" destination="BYZ-38-t0r" id="7m6-FC-nLk"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="C" id="9hX-eo-I1u">
+                            <barButtonItem title=" C " id="9hX-eo-I1u">
                                 <connections>
                                     <action selector="C:" destination="BYZ-38-t0r" id="Nz9-Rh-muV"/>
                                 </connections>
@@ -49,12 +49,12 @@
                                     <action selector="indicator:" destination="BYZ-38-t0r" id="6V9-IO-AQ8"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="F" id="a4Q-KV-PEz">
+                            <barButtonItem title=" F " id="a4Q-KV-PEz">
                                 <connections>
                                     <action selector="F:" destination="BYZ-38-t0r" id="0ph-Ka-4kU"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="E" id="Lxq-Dn-f4u">
+                            <barButtonItem title=" E " id="Lxq-Dn-f4u">
                                 <connections>
                                     <action selector="E:" destination="BYZ-38-t0r" id="Nrk-jh-Kyo"/>
                                 </connections>
@@ -74,7 +74,7 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wbd-xa-DUq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
