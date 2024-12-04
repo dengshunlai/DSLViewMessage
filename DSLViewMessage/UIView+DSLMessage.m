@@ -17,16 +17,16 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 @interface UIView ()
 
 @property (strong, nonatomic) UIImageView *dsl_msgImageView;
-@property (strong, nonatomic) UIButton *dsl_msgButton;
 @property (strong, nonatomic) UILabel *dsl_msgLable;
 @property (strong, nonatomic) UILabel *dsl_subMsgLable;
+@property (strong, nonatomic) UIButton *dsl_msgButton;
 @property (strong, nonatomic) UIView *dsl_msgContentView;
 
 @property (copy, nonatomic) ButtonClickBlock dsl_msgButtonClickBlock;
 
 @property (strong, nonatomic) UIView *dsl_indicatorView;
-@property (strong, nonatomic) UIView *dsl_indicatorContentView;
 @property (strong, nonatomic) UILabel *dsl_indicatorMsgLable;
+@property (strong, nonatomic) UIView *dsl_indicatorContentView;
 
 @property (strong, nonatomic) NSMutableArray *dsl_viewMsg_selfConstraints;
 
@@ -35,6 +35,22 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 @implementation UIView (DSLMessage)
 
 #pragma mark - objec_associated
+
+- (UIImageView *)dsl_msgImageView
+{
+    UIImageView *iv = objc_getAssociatedObject(self, @selector(dsl_msgImageView));
+    if (!iv) {
+        self.dsl_msgImageView = iv = [[UIImageView alloc] init];
+        [self.dsl_msgContentView addSubview:iv];
+        iv.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return iv;
+}
+
+- (void)setDsl_msgImageView:(UIImageView *)dsl_msgImageView
+{
+    objc_setAssociatedObject(self, @selector(dsl_msgImageView), dsl_msgImageView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 - (UILabel *)dsl_msgLable
 {
@@ -98,22 +114,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 - (void)setDsl_msgButton:(UIButton *)dsl_msgButton
 {
     objc_setAssociatedObject(self, @selector(dsl_msgButton), dsl_msgButton, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (UIImageView *)dsl_msgImageView
-{
-    UIImageView *iv = objc_getAssociatedObject(self, @selector(dsl_msgImageView));
-    if (!iv) {
-        self.dsl_msgImageView = iv = [[UIImageView alloc] init];
-        [self.dsl_msgContentView addSubview:iv];
-        iv.translatesAutoresizingMaskIntoConstraints = NO;
-    }
-    return iv;
-}
-
-- (void)setDsl_msgImageView:(UIImageView *)dsl_msgImageView
-{
-    objc_setAssociatedObject(self, @selector(dsl_msgImageView), dsl_msgImageView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIView *)dsl_msgContentView
@@ -196,16 +196,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 - (void)setDsl_indicatorContentView:(UIView *)dsl_indicatorContentView
 {
     objc_setAssociatedObject(self, @selector(dsl_indicatorContentView), dsl_indicatorContentView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSArray *)dsl_indicatorContentViewConstraints
-{
-    return objc_getAssociatedObject(self, @selector(dsl_indicatorContentViewConstraints));
-}
-
-- (void)setDsl_indicatorContentViewConstraints:(NSArray *)dsl_indicatorContentViewConstraints
-{
-    objc_setAssociatedObject(self, @selector(dsl_indicatorContentViewConstraints), dsl_indicatorContentViewConstraints, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSMutableArray *)dsl_viewMsg_selfConstraints
@@ -332,14 +322,17 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
                                                                         attribute:NSLayoutAttributeCenterX
                                                                        multiplier:1
                                                                          constant:0]];
-    [self.dsl_msgContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[dsl_msgImageView(imageViewHeight)]-8-[dsl_msgLable]-5-[dsl_subMsgLable]-7-[dsl_msgButton(buttonHeight)]-5-|"
-                                                                                    options:0
-                                                                                    metrics:@{@"imageViewHeight":@(image ? image.size.height : 0),
-                                                                                              @"buttonHeight":@(buttonText.length ? 32 : 0)}
-                                                                                      views:@{@"dsl_msgImageView":self.dsl_msgImageView,
-                                                                                              @"dsl_msgLable":self.dsl_msgLable,
-                                                                                              @"dsl_subMsgLable":self.dsl_subMsgLable,
-                                                                                              @"dsl_msgButton":self.dsl_msgButton}]];
+    NSString *vfStr = @"V:|-5-[dsl_msgImageView(imageViewHeight)]-8-[dsl_msgLable]-5-[dsl_subMsgLable]-7-[dsl_msgButton(buttonHeight)]-5-|";
+    [self.dsl_msgContentView addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:vfStr
+                                             options:0
+                                             metrics:@{@"imageViewHeight":@(image ? image.size.height : 0),
+                                                       @"buttonHeight":@(buttonText.length ? 32 : 0)}
+                                               views:@{@"dsl_msgImageView":self.dsl_msgImageView,
+                                                       @"dsl_msgLable":self.dsl_msgLable,
+                                                       @"dsl_subMsgLable":self.dsl_subMsgLable,
+                                                       @"dsl_msgButton":self.dsl_msgButton}]
+    ];
     
     CGSize size = [self.dsl_msgContentView systemLayoutSizeFittingSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 20, 1000)];
     
